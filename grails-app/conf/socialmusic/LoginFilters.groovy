@@ -5,6 +5,7 @@ class LoginFilters {
 
     static Set<Map<String, String>> nonAuthenticatedActions = [
             [controller: 'account', action: 'signIn'],
+            [controller: 'account', action: 'home'],
             [controller: 'account', action: 'loginForm'],
             [controller: 'account', action: 'saveNewAccount'],
             [controller: 'account', action: 'newAccount']
@@ -37,7 +38,7 @@ class LoginFilters {
 
 
                 if (actionRequiresAuthentication(controllerName, actionName) && !session?.objetoLogin) {
-                    redirect(uri: '/')
+                    redirect(controller: 'account', action: 'home')
                     return false
                 } else {
                     return true

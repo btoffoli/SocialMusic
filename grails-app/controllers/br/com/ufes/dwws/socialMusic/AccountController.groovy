@@ -153,4 +153,8 @@ class AccountController extends AbstractBaseController {
         session.invalidate()
         redirect(uri: '/')
     }
+
+    def home() {
+        render (view: '/home.gsp')
+    }
 }

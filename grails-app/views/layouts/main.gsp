@@ -30,13 +30,15 @@
 		<div id="menu_items">
 			<ul id="menu">
 				<g:if test="${request.getSession(false)?.objetoLogin}">
-					<li><g:link uri="/album">Albuns</g:link></li>
-					<li><g:link uri="/authorship">Autorias</g:link></li>
+					<li><g:link uri="/album"><g:message code="default.button.myAlbum.label"></g:message></g:link></li>
+					<li><g:link uri="/authorship"><g:message code="default.button.myAuthorShip.label"></g:message></g:link></li>
 					<li><g:link uri="/music">Musicas</g:link></li>
 					<li><g:link uri="/account/signOut">Sair</g:link></li>
 				</g:if>
 				<g:else>
-					<li><g:link uri="/account/loginForm">Entrar</g:link></li>
+					<li><g:link uri="/account/loginForm">
+						<g:message code="default.button.login.label"></g:message>
+					</g:link></li>
 				</g:else>
 
 			</ul>
