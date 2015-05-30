@@ -39,7 +39,7 @@
         </fieldset>
         <fieldset class="buttons">
             <g:submitButton name="loginButton" class="save" value="${message(code: 'default.button.login.label', default: 'Entrar')}" />
-            <g:actionSubmit value="Criar" class="save" action="create"/>
+            <g:actionSubmit value="Criar" class="save" action="newAccount"/>
         </fieldset>
     </g:form>
 </div>

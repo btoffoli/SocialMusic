@@ -35,7 +35,7 @@ class MusicController {
             return
         }
 
-        musicInstance.save flush:true
+        musicInstance.save flush: true
 
         request.withFormat {
             form {

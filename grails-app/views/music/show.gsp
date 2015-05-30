@@ -44,7 +44,7 @@
 					<li class="fieldcontain">
 						<span id="name-label" class="property-label"><g:message code="music.url.label" default="URL" /></span>
 						
-							<span class="property-value" aria-labelledby="url-label"><g:link url="${musicInstance?.url}" target="_blank"><g:fieldValue bean="${musicInstance}" field="url"/></g:link></span>
+							<span class="property-value" aria-labelledby="url-label"><a href="${fieldValue(bean:itemInstance, field:'uri')}" target="new"><g:fieldValue bean="${musicInstance}" field="url"/></a></span>
 						
 					</li>
 

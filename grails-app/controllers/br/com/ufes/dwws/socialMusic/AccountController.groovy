@@ -120,7 +120,10 @@ class AccountController extends AbstractBaseController {
             return
         }
 
-        accountInstance.save flush:true
+
+        Account.withTransaction {
+            accountInstance.save()
+        }
 
         request.withFormat {
             form {
@@ -138,7 +141,7 @@ class AccountController extends AbstractBaseController {
     def signIn(Account accountInstance) {
         Account account = accountsManagerService.login(accountInstance)
         if (account) {
-            session.objeto = new SessionObject(account: account)
+            session.objetoLogin = new SessionObject(account: account)
             redirect(uri: '/')
         } else {
             flash.message = "Falha na autenticação"

@@ -7,7 +7,17 @@ class Music {
     String url
 
     static constraints = {
+
     }
 
-    static mappedBy = [album: 'musics']
+    static mappedBy = [
+            album: 'musics'
+
+    ]
+
+    static belongsTo = Profile
+
+    static hasMany = [profiles: Profile]
+
+
 }

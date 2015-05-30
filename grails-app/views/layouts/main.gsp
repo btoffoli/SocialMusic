@@ -29,8 +29,7 @@
 		</div><!--close welcome-->
 		<div id="menu_items">
 			<ul id="menu">
-				<g:if test="${request.getSession(false)?.objeto}">
-					<li><g:link uri="/profile/">Profiles</g:link></li>
+				<g:if test="${request.getSession(false)?.objetoLogin}">
 					<li><g:link uri="/album">Albuns</g:link></li>
 					<li><g:link uri="/authorship">Autorias</g:link></li>
 					<li><g:link uri="/music">Musicas</g:link></li>
