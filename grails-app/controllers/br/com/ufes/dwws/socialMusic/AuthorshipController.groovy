@@ -1,7 +1,8 @@
 package br.com.ufes.dwws.socialMusic
 
 
-
+import grails.converters.JSON
+import groovy.json.*
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -100,5 +101,12 @@ class AuthorshipController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    def lastAdded() {
+
+        Authorship authorship = Authorship.last()
+        
+        render "{\"id\":\"${authorship.id}\", \"name\":\"${authorship.name}\",\"page\":\"${authorship.page}\"}"
     }
 }

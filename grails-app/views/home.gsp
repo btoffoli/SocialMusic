@@ -16,6 +16,8 @@
             $('#slider').nivoSlider();
         });
     </script>
+    <g:javascript src="home/home.js"/>
+    <g:javascript src="youtube.js"/>
 </head>
 
 <body>
@@ -31,17 +33,16 @@
     </div><!--close banner_image-->
 
     <div class="sidebar_container">
-        <div class="sidebar">
+        <div id="lastAddedAlbum" class="sidebar" style="display:none" >
             <div class="sidebar_item">
-                <h2>Bem vindo!</h2>
-                <p>Tenha sempre seu artista favorito aonde você estiver.</p>
+                <h2>Último Album</h2>
+                <a id="lastAddedAlbumPage" target="new"><h4 id="lastAddedAlbumName"></h4></a>
             </div><!--close sidebar_item-->
         </div><!--close sidebar-->
-        <div class="sidebar">
+        <div id="lastAddedAuthorship" class="sidebar" style="display:none" >
             <div class="sidebar_item">
-                <h2>Última atualização</h2>
-                <h4>Abril de 2015</h4>
-
+                <h2>Última Autoria</h2>
+                <a id="lastAddedAuthorshipPage" target="new"><h4 id="lastAddedAuthorshipName"></h4></a>
             </div><!--close sidebar_item-->
         </div><!--close sidebar-->
         <div class="sidebar">
@@ -53,59 +54,34 @@
     </div><!--close sidebar_container-->
 
     <div id="content">
-        <div class="content_item">
+        <div class="content_item" style="text-align:center" >
+            <div id="lastAddedMusic" style="display:none" >
+                <h1 style="background: -webkit-linear-gradient(#C56B85, #381029);border-radius: 0px 15px 0px 15px;padding: 20px;" >Última Música</h1>
+                <div id="mainPlayer"></div>
+            </div>
+            <!--
             <h1>Mais rock, ou mais pop ?</h1>
             <div class="content_container">
                 <p>Você não precisa mais manter seu player aberto. Alias, em tempos de streaming, para que manter offline quando você pode ter seu acervo músical com você, aonde estiver ?</p>
                 <div class="button_small">
                     <a href="http://codigofonte.uol.com.br/noticias/pesquisa-streaming-esta-acabando-com-pirataria-no-brasil" target="_blank">Saiba mais</a>
-                </div><!--close button_small-->
-            </div><!--close content_container-->
-            <div class="content_container">
-                <p>Social Music ainda não é uma marca registrada.  </p>
-                <div class="button_small">
-                    <a href="http://www.fapesp.br/4516" target="_blank">Saiba mais</a>
-                </div><!--close button_small-->
-            </div><!--close content_container-->
-            <div class="content_container">
-                <p><br><br>Caso tenha qualquer dificuldade de visualização, entre em contato com o</p>
-                <div class="button_small">
-                    <a href="mailto:fabioti6@gmail.com">Suporte</a>
-                </div><!--close button_small-->
-            </div><!--close content_container-->
-            <div class="content_container">
-                <p>Você é um desenvolvedor talentoso ?<br>Estamos lhe procurando !</p>
-                <div class="button_small">
-                    <a href="http://www.infoq.com/br/news/2014/04/dev-java-mais-procurado" target="_blank">Saiba mais</a>
-                </div><!--close button_small-->
-            </div><!--close content_container-->
-        </div><!--close content_item-->
-    </div><!--close content-->
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
 
+    <!--
     <div id="content_blue">
         <div class="content_blue_container_box">
             <h4>SocialMusic no Facebook</h4>
             <p> Veja o que estão falando sobre o nosso trabalho</p>
             <div class="readmore">
                 <a href="#">Visite-nos</a>
-            </div><!--close readmore-->
-        </div><!--close content_blue_container_box-->
-        <div class="content_blue_container_box">
-            <h4>Últimas noticias</h4>
-            <p> Veja as últimas notícias do mundo da música</p>
-            <div class="readmore">
-                <a href="#">Fique ligado</a>
-            </div><!--close readmore-->
-        </div><!--close content_blue_container_box-->
-        <div class="content_blue_container_boxl">
-            <h4>Sobre os autores</h4>
-            <p> Um pouco sobre a história de cada membro do projeto SocialMusic</p>
-            <div class="readmore">
-                <a href="#">Leia mais</a>
-            </div><!--close readmore-->
-        </div><!--close content_blue_container_box1-->
-        <br style="clear:both"/>
-    </div><!--close content_blue-->
+            </div>
+        </div>
+    </div>
+    -->
 </div><!--close site_content-->
 </body>
 </html>

@@ -4,6 +4,8 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
+		<g:javascript src="youtube.js"/>
+		<g:javascript src="music/show.js"/>
 		<g:set var="entityName" value="${message(code: 'music.label', default: 'Music')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
@@ -44,7 +46,7 @@
 					<li class="fieldcontain">
 						<span id="name-label" class="property-label"><g:message code="music.url.label" default="URL" /></span>
 						
-							<span class="property-value" aria-labelledby="url-label"><a href="${fieldValue(bean:itemInstance, field:'uri')}" target="new"><g:fieldValue bean="${musicInstance}" field="url"/></a></span>
+							<span class="property-value" aria-labelledby="url-label"><a href="${musicInstance?.url}" target="new"><g:fieldValue bean="${musicInstance}" field="url"/></a></span>
 						
 					</li>
 
@@ -62,49 +64,5 @@
 				</fieldset>
 			</g:form>
 		</div>
-
-		<script>
-		
-		//STARTING YOUTUBE API
-		
-		var tag = document.createElement('script');
-		tag.src = "https://www.youtube.com/iframe_api";
-		var firstScriptTag = document.getElementsByTagName('script')[0];
-		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-		
-		//EVENT LOGIC
-		
-		function onYouTubeIframeAPIReady() {
-
-			var videoURL = document.getElementById("videoURL").value;
-			var videoID = extractVideoID(videoURL);
-		
-			var mainPlayer = new YT.Player('mainPlayer', {
-				height: '390',
-				width: '640',
-				videoId: videoID,
-				events: {
-					'onReady': function(event) {
-						event.target.playVideo();
-					}
-				}
-			});
-		}
-
-		//UTILS
-
-		function extractVideoID(url) {
-			var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-		    var match = url.match(regExp);
-		    if (match&&match[7].length==11){
-		        return match[7];
-		    }else{
-		        console.log("URL invalida");
-		        return false;
-		    }
-		}
-	  
-    </script>
 	</body>
 </html>

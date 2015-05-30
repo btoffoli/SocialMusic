@@ -5,10 +5,13 @@ class LoginFilters {
 
     static Set<Map<String, String>> nonAuthenticatedActions = [
             [controller: 'account', action: 'signIn'],
-            [controller: 'account', action: 'home'],
             [controller: 'account', action: 'loginForm'],
             [controller: 'account', action: 'saveNewAccount'],
-            [controller: 'account', action: 'newAccount']
+            [controller: 'account', action: 'newAccount'],
+            [controller: 'account', action: 'home'],
+            [controller: 'music', action: 'lastAdded'],
+            [controller: 'album', action: 'lastAdded'],
+            [controller: 'authorship', action: 'lastAdded']
 
     ]
 

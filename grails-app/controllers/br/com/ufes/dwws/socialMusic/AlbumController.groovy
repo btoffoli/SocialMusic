@@ -101,4 +101,11 @@ class AlbumController {
             '*'{ render status: NOT_FOUND }
         }
     }
+
+    def lastAdded() {
+
+        Album album = Album.last()
+        
+        render "{\"id\":\"${album.id}\", \"name\":\"${album.name}\",\"page\":\"${album.page}\"}"
+    }
 }

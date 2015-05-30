@@ -101,4 +101,12 @@ class MusicController {
             '*'{ render status: NOT_FOUND }
         }
     }
+
+
+    def lastAdded() {
+
+        Music music = Music.last()
+
+        render music.url
+    }
 }
