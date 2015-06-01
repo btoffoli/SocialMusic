@@ -6,7 +6,7 @@
     <title><g:message code="default.login.label" args="[entityName]" default="Login" /></title>
 </head>
 <body>
-<a href="#create-account" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+<a href="#create-account" class="skip" tabindex="-1">Skipe</a>
 <div id="create-account" class="content scaffold-create" role="main">
     <h1><g:message code="default.login.label" args="[entityName]" default="Entrar" /></h1>
     <g:if test="${flash.message}">
@@ -38,10 +38,14 @@
 
         </fieldset>
         <fieldset class="buttons">
-            <g:submitButton name="loginButton" class="save" value="${message(code: 'default.button.login.label', default: 'Entrar')}" />
-            <g:actionSubmit value="Criar" class="save" action="newAccount"/>
+            <g:submitButton name="loginButton" class="save" value="${message(code:'default.loginForm.loginButton')}" />
+            <g:actionSubmit name="createButton" class="save" value="${message(code:'default.loginForm.createButton')}" action="newAccount"/>
+
         </fieldset>
     </g:form>
 </div>
 </body>
 </html>
+
+
+<g:message code="default.loginForm.loginButton"></g:message>

@@ -3,7 +3,7 @@
 
 <head>
     <meta name="layout" content="main"/>
-    <title>ARaynorDesign Template</title>
+    <title>Social Music</title>
     <meta name="description" content="free website template" />
     <meta name="keywords" content="enter your keywords here" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -33,13 +33,13 @@
     <div class="sidebar_container">
         <div class="sidebar">
             <div class="sidebar_item">
-                <h2>Bem vindo!</h2>
+                <h2><g:message code="default.button.home.Welcome"></g:message></h2>
                 <p>Tenha sempre seu artista favorito aonde você estiver.</p>
             </div><!--close sidebar_item-->
         </div><!--close sidebar-->
         <div class="sidebar">
             <div class="sidebar_item">
-                <h2>Última atualização</h2>
+                <h2><g:message code="default.button.home.LastUpdate"></g:message></h2>
                 <h4>Abril de 2015</h4>
 
             </div><!--close sidebar_item-->
@@ -58,25 +58,25 @@
             <div class="content_container">
                 <p>Você não precisa mais manter seu player aberto. Alias, em tempos de streaming, para que manter offline quando você pode ter seu acervo músical com você, aonde estiver ?</p>
                 <div class="button_small">
-                    <a href="http://codigofonte.uol.com.br/noticias/pesquisa-streaming-esta-acabando-com-pirataria-no-brasil" target="_blank">Saiba mais</a>
+                    <a href="http://codigofonte.uol.com.br/noticias/pesquisa-streaming-esta-acabando-com-pirataria-no-brasil" target="_blank"><g:message code="default.button.home.KnowMore"></g:message></a>
                 </div><!--close button_small-->
             </div><!--close content_container-->
             <div class="content_container">
                 <p>Social Music ainda não é uma marca registrada.  </p>
                 <div class="button_small">
-                    <a href="http://www.fapesp.br/4516" target="_blank">Saiba mais</a>
+                    <a href="http://www.fapesp.br/4516" target="_blank"><g:message code="default.button.home.KnowMore"></g:message></a>
                 </div><!--close button_small-->
             </div><!--close content_container-->
             <div class="content_container">
-                <p><br><br>Caso tenha qualquer dificuldade de visualização, entre em contato com o</p>
+                <p><br><br>Caso tenha qualquer dificuldade de visualização, entre em contato.</p>
                 <div class="button_small">
-                    <a href="mailto:fabioti6@gmail.com">Suporte</a>
+                    <a href="mailto:fabioti6@gmail.com"><g:message code="default.button.home.Support"></g:message></a>
                 </div><!--close button_small-->
             </div><!--close content_container-->
             <div class="content_container">
                 <p>Você é um desenvolvedor talentoso ?<br>Estamos lhe procurando !</p>
                 <div class="button_small">
-                    <a href="http://www.infoq.com/br/news/2014/04/dev-java-mais-procurado" target="_blank">Saiba mais</a>
+                    <a href="http://www.infoq.com/br/news/2014/04/dev-java-mais-procurado" target="_blank"><g:message code="default.button.home.Hiring"></g:message></a>
                 </div><!--close button_small-->
             </div><!--close content_container-->
         </div><!--close content_item-->
@@ -87,21 +87,21 @@
             <h4>SocialMusic no Facebook</h4>
             <p> Veja o que estão falando sobre o nosso trabalho</p>
             <div class="readmore">
-                <a href="#">Visite-nos</a>
+                <a href="#"><g:message code="default.button.home.VisitUs"></g:message></a>
             </div><!--close readmore-->
         </div><!--close content_blue_container_box-->
         <div class="content_blue_container_box">
             <h4>Últimas noticias</h4>
             <p> Veja as últimas notícias do mundo da música</p>
             <div class="readmore">
-                <a href="#">Fique ligado</a>
+                <a href="#"><g:message code="default.button.home.StayTuned"></g:message></a>
             </div><!--close readmore-->
         </div><!--close content_blue_container_box-->
         <div class="content_blue_container_boxl">
             <h4>Sobre os autores</h4>
             <p> Um pouco sobre a história de cada membro do projeto SocialMusic</p>
             <div class="readmore">
-                <a href="#">Leia mais</a>
+                <a href="#"><g:message code="default.button.home.ReadMore"></g:message></a>
             </div><!--close readmore-->
         </div><!--close content_blue_container_box1-->
         <br style="clear:both"/>
