@@ -15,7 +15,7 @@
 			</ul>
 		</div>
 		<div id="list-album" class="content scaffold-list" role="main">
-			<h1>Lista de Albuns</h1>
+			<h1><g:message code="album.namelist.label"></g:message></h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
