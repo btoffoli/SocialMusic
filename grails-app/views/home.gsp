@@ -35,14 +35,14 @@
     <div class="sidebar_container">
         <div id="lastAddedAlbum" class="sidebar" style="display:none" >
             <div class="sidebar_item">
-                <h2><g:message code="default.button.home.Welcome"></g:message></h2>
-                <p>Tenha sempre seu artista favorito aonde você estiver.</p>
+                <h2><g:message code="default.button.home.lastAlbm"></g:message></h2>
+                <a id="lastAddedAlbumPage" target="new"><h4 id="lastAddedAlbumName"></h4></a>
             </div><!--close sidebar_item-->
         </div><!--close sidebar-->
         <div id="lastAddedAuthorship" class="sidebar" style="display:none" >
             <div class="sidebar_item">
-                <h2><g:message code="default.button.home.LastUpdate"></g:message></h2>
-                <h4>Abril de 2015</h4>
+                <h2><g:message code="default.button.home.lastAuthorship"></g:message></h2>
+                <a id="lastAddedAuthorshipPage" target="new"><h4 id="lastAddedAuthorshipName"></h4></a>
 
             </div><!--close sidebar_item-->
         </div><!--close sidebar-->
