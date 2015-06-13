@@ -10,8 +10,8 @@
 		<a href="#edit-album" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><g:link class="list" action="index">Lista de Albuns</g:link></li>
-				<li><g:link class="create" action="create">Novo Album</g:link></li>
+				<li><g:link class="list" action="index"><g:message code="album.edit.listbutton"/></g:link></li>
+				<li><g:link class="create" action="create"><g:message code="album.edit.newbutton"/></g:link></li>
 			</ul>
 		</div>
 		<div id="edit-album" class="content scaffold-edit" role="main">
@@ -32,7 +32,7 @@
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
-					<g:actionSubmit class="save" action="update" value="Salvar" />
+					<g:actionSubmit class="save" action="update" value="${message(code:'default.album.editform.saveButton')}" />
 				</fieldset>
 			</g:form>
 		</div>

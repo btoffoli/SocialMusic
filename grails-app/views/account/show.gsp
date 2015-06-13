@@ -8,7 +8,7 @@
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#show-account" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<a href="#show-account" class="skip" tabindex="-1"><g:message code="default.link.skip.label"/></a>
 		<div class="nav" role="navigation">
 			<ul>
 			</ul>
@@ -31,7 +31,7 @@
 			
 				<g:if test="${accountInstance?.email}">
 				<li class="fieldcontain">
-					<span id="email-label" class="property-label"><g:message code="account.email.label" default="Email" /></span>
+					<span id="email-label" class="property-label"><g:message code="account.email.label" /></span>
 					
 						<span class="property-value" aria-labelledby="email-label"><g:fieldValue bean="${accountInstance}" field="email"/></span>
 					
@@ -42,7 +42,7 @@
 			<g:form url="[resource:accountInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${accountInstance}">Editar</g:link>
-					<g:actionSubmit class="delete" action="delete" value="Deletar" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Tem certeza?')}');" />
+					<g:actionSubmit class="delete" action="delete" value="${message(code:'default.account.show.deletebutton')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Tem certeza?')}');" />
 				</fieldset>
 			</g:form>
 		</div>

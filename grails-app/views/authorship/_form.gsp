@@ -11,7 +11,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: authorshipInstance, field: 'page', 'error')} ">
 	<label for="page">
-		<g:message code="authorship.page.label" default="Pagina" />
+		<g:message code="authorship.page.label" />
 		
 	</label>
 	<g:textField name="page" value="${authorshipInstance?.page}"/>
@@ -19,7 +19,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: authorshipInstance, field: 'albuns', 'error')} ">
 	<label for="albuns">
-		<g:message code="authorship.albuns.label" default="Albuns" />
+		<g:message code="authorship.albuns.label"  />
 		
 	</label>
 	<g:select name="albuns" from="${br.com.ufes.dwws.socialMusic.Album.list()}" multiple="multiple" optionKey="id" size="5" value="${authorshipInstance?.albuns*.id}" optionValue="name" class="many-to-many"/>
