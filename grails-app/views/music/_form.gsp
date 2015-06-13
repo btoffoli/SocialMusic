@@ -18,7 +18,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: musicInstance, field: 'album', 'error')} required">
 	<label for="album">
-		<g:message code="music.album.label" default="Album" />
+		<g:message code="music.album.label"/>
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select id="album" name="album.id" from="${br.com.ufes.dwws.socialMusic.Album.list()}" optionKey="id" required="" value="${musicInstance?.album?.id}" optionValue="name" class="many-to-one"/>

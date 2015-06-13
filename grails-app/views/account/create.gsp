@@ -6,7 +6,7 @@
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#create-account" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<a href="#create-account" class="skip" tabindex="-1"><g:message code="default.button.myAlbum.label"></g:message></a>
 		<div class="nav" role="navigation">
 			<ul>
 			</ul>
@@ -28,7 +28,7 @@
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
-					<g:submitButton name="create" class="save" value="Salvar" />
+					<g:submitButton name="create" class="save" value="${message(code:'default.createForm.saveButton')}" />
 				</fieldset>
 			</g:form>
 		</div>

@@ -32,8 +32,8 @@
 				<g:if test="${request.getSession(false)?.objetoLogin}">
 					<li><g:link uri="/album"><g:message code="default.button.myAlbum.label"></g:message></g:link></li>
 					<li><g:link uri="/authorship"><g:message code="default.button.myAuthorShip.label"></g:message></g:link></li>
-					<li><g:link uri="/music">Musicas</g:link></li>
-					<li><g:link uri="/account/signOut">Sair</g:link></li>
+					<li><g:link uri="/music"><g:message code="default.button.myMusics.label"></g:message></g:link></li>
+					<li><g:link uri="/account/signOut"><g:message code="default.button.logoff.label"></g:message></g:link></li>
 				</g:if>
 				<g:else>
 					<li><g:link uri="/account/loginForm">
@@ -42,7 +42,7 @@
 				</g:else>
 
 			</ul>
-		</div><!--close menu-->
+		</div><!--close  menu-->
 	</div><!--close menubar-->
 </div>
 

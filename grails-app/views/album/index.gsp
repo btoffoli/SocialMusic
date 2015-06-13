@@ -4,18 +4,18 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'album.label', default: 'Album')}" />
+		<g:set var="entityName" value="${message(code:'album.label')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
 		<a href="#list-album" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><g:link class="create" action="create">Novo Album</g:link></li>
+				<li><g:link class="create" action="create"><g:message code="album.index.newbutton"/></g:link></li>
 			</ul>
 		</div>
 		<div id="list-album" class="content scaffold-list" role="main">
-			<h1>Lista de Albuns</h1>
+			<h1><g:message code="album.namelist.label"></g:message></h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>

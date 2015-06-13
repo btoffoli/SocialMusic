@@ -3,7 +3,7 @@
 
 <head>
     <meta name="layout" content="main"/>
-    <title>ARaynorDesign Template</title>
+    <title>Social Music</title>
     <meta name="description" content="free website template" />
     <meta name="keywords" content="enter your keywords here" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -35,14 +35,15 @@
     <div class="sidebar_container">
         <div id="lastAddedAlbum" class="sidebar" style="display:none" >
             <div class="sidebar_item">
-                <h2>Último Album</h2>
-                <a id="lastAddedAlbumPage" target="new"><h4 id="lastAddedAlbumName"></h4></a>
+                <h2><g:message code="default.button.home.Welcome"></g:message></h2>
+                <p>Tenha sempre seu artista favorito aonde você estiver.</p>
             </div><!--close sidebar_item-->
         </div><!--close sidebar-->
         <div id="lastAddedAuthorship" class="sidebar" style="display:none" >
             <div class="sidebar_item">
-                <h2>Última Autoria</h2>
-                <a id="lastAddedAuthorshipPage" target="new"><h4 id="lastAddedAuthorshipName"></h4></a>
+                <h2><g:message code="default.button.home.LastUpdate"></g:message></h2>
+                <h4>Abril de 2015</h4>
+
             </div><!--close sidebar_item-->
         </div><!--close sidebar-->
         <div class="sidebar">
@@ -77,7 +78,7 @@
             <h4>SocialMusic no Facebook</h4>
             <p> Veja o que estão falando sobre o nosso trabalho</p>
             <div class="readmore">
-                <a href="#">Visite-nos</a>
+                <a href="#"><g:message code="default.button.home.VisitUs"></g:message></a>
             </div>
         </div>
     </div>

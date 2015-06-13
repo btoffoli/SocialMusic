@@ -11,11 +11,11 @@
 		<a href="#list-music" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><g:link class="create" action="create">Nova Musica</g:link></li>
+				<li><g:link class="create" action="create"><g:message code="music.index.create.label"/></g:link></li>
 			</ul>
 		</div>
 		<div id="list-music" class="content scaffold-list" role="main">
-			<h1>Lista de Musicas</h1>
+			<h1><g:message code="music.index.listlabel"/></h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>

@@ -11,12 +11,12 @@
 		<a href="#show-authorship" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><g:link class="list" action="index">Lista de Autorias</g:link></li>
-				<li><g:link class="create" action="create">Nova Autoria</g:link></li>
+				<li><g:link class="list" action="index"><g:message code="authorship.show.listbutton"/></g:link></li>
+				<li><g:link class="create" action="create"><g:message code="authorship.show.newbutton"/></g:link></li>
 			</ul>
 		</div>
 		<div id="show-authorship" class="content scaffold-show" role="main">
-			<h1>Dados da Autoria</h1>
+			<h1><g:message code="authorship.show.label"/> </h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -24,7 +24,7 @@
 			
 				<g:if test="${authorshipInstance?.name}">
 				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="authorship.name.label" default="Nome" /></span>
+					<span id="name-label" class="property-label"><g:message code="authorship.name.label"  /></span>
 					
 						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${authorshipInstance}" field="name"/></span>
 					
@@ -54,8 +54,8 @@
 			</ol>
 			<g:form url="[resource:authorshipInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
-					<g:link class="edit" action="edit" resource="${authorshipInstance}">Editar</g:link>
-					<g:actionSubmit class="delete" action="delete" value="Deletar" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					<g:link class="edit" action="edit" resource="${albumInstance}"><g:message code="authorship.show.editbutton"/></g:link>
+					<g:actionSubmit class="delete" action="delete" value="${message(code:'default.music.show.deletebutton')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>
 		</div>
