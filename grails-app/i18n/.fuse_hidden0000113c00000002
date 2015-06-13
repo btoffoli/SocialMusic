@@ -79,81 +79,84 @@ default.button.myMusics.label=             Músicas
 default.button.welcome.label=              Bem vindo
 default.button.login.label=                Entrar
 default.button.logoff.label=               Sair
-default.link.skip.label=                   Voltar ao conteúdo
+default.link.skip.label=                   Voltar ao conteudo
 default.login.label=                       Insira sua conta
+
 default.createForm.saveButton=             Salvar
 default.profile.create.saveButton=         Salvar
-default.profile.form.saveButton=           Salvar
 default.editForm.saveButton=               Salvar
+
+
+
+
+
+
+default.profile.form.saveButton=           Salvar
+
 default.music.form.saveButton=             Salvar
 default.music.editform.saveButton=         Salvar
 default.authorship.editform.saveButton=    Salvar
 default.authorship.createform.saveButton=  Salvar
 default.album.editform.saveButton=         Salvar
 default.album.createform.saveButton=       Salvar
+
+default.loginForm.loginButton=             Entrar
+default.loginForm.createButton=            Criar
+default.album.show.label=                  Dados do Album
 default.account.show.deletebutton=         Deletar
 default.album.show.deletebutton=           Deletar
 default.music.show.deletebutton=           Deletar
-authorship.show.label=                     Dados de Autoria
-authorship.index.label=                    Lista de Autorias
-authorship.show.listbutton=                Lista de Autorias
-authorship.edit.listbutton=                Lista de Autorias
-authorship.create.label=                   Nova Autoria
-authorship.edit.newbutton=                 Nova Autoria
-authorship.show.newbutton=                 Nova Autoria
-authorship.index.newbutton=                Nova Autoria
-album.show.newbutton=                      Novo Album
-album.index.newbutton=                     Novo Album
-album.edit.newbutton=                      Novo Album
-album.create.label=                        Novo Album
-music.show.listbutton=                     Lista de Músicas
-music.index.listlabel=                     Lista de Músicas
-music.create.listlabel=                    Lista de Músicas
-music.edit.listbutton=                     Lista de Músicas
-album.create.listbutton=                   Lista de Albuns
-album.edit.listbutton=                     Lista de Albuns
-album.show.listbutton=                     Lista de Albuns
-album.namelist.label   =                   Lista de Albuns
-authorship.create.list.label=              Lista de Albums
-music.show.newbutton=                      Nova Musica
-music.edit.newbutton=                      Nova Música
-music.create.label=                        Nova Música
-music.index.create.label=                  Nova Música
-profile.name.label=                        Conta
-profile.account.label=                     Conta
-music.name.label=                          Nome
-authorship.name.label=                     Nome
-album.name.label       =                   Nome
-music.show.editbutton2=                    Editar
-authorship.show.editbutton=                Editar
-album.show.editbutton=                     Editar
-album.page.label       =                   Página
-authorship.page.label=                     Página
-music.album.label=                         Album
-album.label            =                   Album
-album.show.label=                          Dados do Album
-default.album.show.label=                  Dados do Album
-authorship.label          =                Autoria
-authorship.albuns.label=                   Albuns
 account.login.label=                       Usuário
 account.password.label=                    Senha
 account.label=                             Conta
 account.email.label=                       Email
 spinner.alt=                               Carregando&hellip;
 music.label=                               Musica
+music.name.label=                          Nome
+music.album.label=                         Album
 music.url.label=                           URL
+authorship.show.newbutton=                 Nova Autoria
+authorship.edit.newbutton=                 Nova Autoria
+music.show.newbutton=                      Nova Musica
+music.edit.newbutton=                      Nova Música
+music.index.create.label=                  Nova Música
+music.create.label=                        Nova Música
 music.edit.label=                          Editar Música
-music.show.datalabel=                      Dados da Música
-profile.label=                             Perfil
-profile.avatarURL.label=                   URL para Avatar
-album.musics.label=                        Músicas
-default.loginForm.loginButton=             Entrar
-default.loginForm.createButton=            Criar
+music.index.listlabel=                     Lista de Músicas
+music.create.listlabel=                    Lista de Músicas
+music.show.listbutton=                     Lista de Músicas
+music.edit.listbutton=                     Lista de Músicas
+album.show.newbutton=                      Novo Album
+album.index.newbutton=                     Novo Album
+album.create.label=                        Novo Album
+album.edit.newbutton=                      Novo Album
+album.create.listbutton=                   Lista de Albums
+album.edit.listbutton=                     Lista de Albuns
+album.show.listbutton=                     Lista de Albuns
+album.namelist.label   =                   Lista de Albuns
+authorship.create.list.label=              Lista de Albums
+authorship.index.label=                    Lista de Autorias
+authorship.show.listbutton=                Lista de Autorias
+authorship.edit.listbutton=                Lista de Autorias
+authorship.index.newbutton=                Nova Autoria
+authorship.label          =                Autoria
+
+authorship.name.label=                     Nome
+authorship.page.label=                     Pagina
+authorship.albuns.label=                   Albuns
+authorship.show.editbutton=                Editar
+album.show.label=                          Dados do Album
+album.label            =                   Album
+album.name.label       =                   Nome
+album.page.label       =                   Página
+album.show.editbutton=                     Editar
+authorship.create.label=                   Novo Autoria
 authorship.edit.label=                     Editar Autoria
-
-
-
-
-
-
-
+authorship.show.label=                     Dados de Autoria
+music.show.datalabel=                      Dados da Música
+music.show.editbutton2=                    Editar
+profile.label=                             Perfil
+profile.name.label=                        Conta
+profile.account.label=                     Conta
+profile.avatarURL.label=                   URL para Avatar
+album.musics.label=                        Musicas
