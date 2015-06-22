@@ -1,6 +1,6 @@
 package br.com.ufes.dwws.socialMusic
 
-
+import org.openrdf.model.vocabulary.SESAME
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -107,5 +107,31 @@ class AlbumController {
         Album album = Album.last()
         
         render "{\"id\":\"${album.id}\", \"name\":\"${album.name}\",\"page\":\"${album.page}\"}"
+    }
+
+    def albumSparql() {
+        /*
+
+SELECT ?name ?member ?nameBand
+WHERE {
+ ?member foaf:name ?name .
+ ?member mo:member_of ?band .
+ ?band foaf:name ?nameBand FILTER(lcase(str(?nameBand))="metallica")
+}
+----------------------------------
+PREFIX mo: <http://purl.org/ontology/mo/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?name ?member ?nameBand
+WHERE {
+ ?member foaf:name ?name .
+ ?member mo:member_of ?band .
+ ?band foaf:name ?nameBand FILTER(lcase(str(?nameBand))="metallica")
+}
+         */
+
+
+
+
     }
 }

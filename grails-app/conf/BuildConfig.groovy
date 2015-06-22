@@ -38,17 +38,24 @@ grails.project.dependency.resolution = {
         grailsPlugins()
         grailsHome()
         mavenLocal()
-        grailsCentral()
         mavenCentral()
+        grailsCentral()
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+//        mavenRepo('http://maven.org')
     }
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         // runtime 'mysql:mysql-connector-java:5.1.24'
+
+//        compile 'org.apache.jena:jena:2.13.0'
+//        compile 'org.apache.jena:jena-arq:2.13.0'
+//        compile 'org.apache.jena:jena-runtime:2.12.0'
+//        compile group: 'org.apache.jena', name: 'jena', version: '2.13.0', packaging: 'pom'
+        compile 'org.openrdf.sesame:sesame-runtime:2.8.3'
     }
 
     plugins {
@@ -69,5 +76,8 @@ grails.project.dependency.resolution = {
         //runtime ":cached-resources:1.1"
         //runtime ":yui-minify-resources:0.1.5"
         compile ":console:1.5.4"
+
+
+        compile ":rdfa:0.1.1"
     }
 }
