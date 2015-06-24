@@ -1,5 +1,6 @@
 package br.com.ufes.dwws.socialMusic
 
+import org.openrdf.model.BNode
 import org.openrdf.model.Literal
 import org.openrdf.model.Model
 import org.openrdf.model.Resource
@@ -72,16 +73,22 @@ class RDFController {
     def musics() {
         ValueFactory factory = ValueFactoryImpl.getInstance();
 
-        String musicBrainzBaseURI = 'http://musicbrainz.org/mm/mm-2.1/'
+        String musicBrainzBaseURI = 'http://purl.org/ontology/mo/'
 
         // URI indicando artista
-        URI musicURI = factory.createURI(musicBrainzBaseURI, 'Track')
+
+        //BNode moNode = factory.createBNode('musicBrainzBaseURI')
+
+
 
         Model model = new LinkedHashModel()
 
+        model.setNamespace('mo', musicBrainzBaseURI)
+        URI musicURI = factory.createURI(musicBrainzBaseURI, 'Track')
         Music.list().each { Music music ->
             //URI indicando o recurso artista
             //TODO verificar se esta correto ou se preciso encontrar o RDF do artista
+
             URI uriMusicResource =  factory.createURI(music.url)
 
             //Literal, indicando qual o valor da propriedade recurso musica, no caso o nome dela
