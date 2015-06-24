@@ -10,24 +10,6 @@ class MusicController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    static rdf = [
-            resource: { it.id },	// name of identifying action and identity field of domain model object
-            image:'http://xmlns.com/foaf/0.1/depiction',
-            showRdf:'http://xmlns.com/foaf/0.1/isPrimaryTopicOf'
-    ]
-
-    def showRdf(Music musicInstance) {
-        respond musicInstance
-    }
-
-    def resource = {
-        redirect(action:showRdf(),id:params.id)
-    }
-
-    def image = {
-        redirect(uri:"/images/default-avatar.png")
-    }
-
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Music.list(params), model:[musicInstanceCount: Music.count()]

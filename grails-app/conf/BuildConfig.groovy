@@ -78,6 +78,6 @@ grails.project.dependency.resolution = {
         compile ":console:1.5.4"
 
 
-        compile ":rdfa:0.1.1"
+//        compile ":rdfa:0.1.1"
     }
 }

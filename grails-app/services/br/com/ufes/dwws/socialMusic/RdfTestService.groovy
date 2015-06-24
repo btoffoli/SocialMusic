@@ -40,13 +40,13 @@ class RdfTestService {
         String grNS = "http://purl.org/goodrelations/v1#";
         //model.setNsPrefix("gr", grNS);
         model.setNamespace(new NamespaceImpl('gr', grNS))
-        Resou
+        //Resou
         Resource grOffering = ResourceFactory.createResource(grNS + "Offering");
         Resource grPriceSpecification = ResourceFactory.createResource(grNS + "PriceSpecification");
-        Property gravailabilityStarts = ResourceFactory.createProperty(grNS + "availabilityStarts");
-        Property gravailabilityEnds = ResourceFactory.createProperty(grNS + "availabilityEnds");
-        Property grhasPriceSpecification = ResourceFactory.createProperty(grNS + "hasPriceSpecification");
-        Property grhasCurrencyValue = ResourceFactory.createProperty(grNS + "hasCurrencyValue");
+//        Property gravailabilityStarts = ResourceFactory.createProperty(grNS + "availabilityStarts");
+//        Property gravailabilityEnds = ResourceFactory.createProperty(grNS + "availabilityEnds");
+//        Property grhasPriceSpecification = ResourceFactory.createProperty(grNS + "hasPriceSpecification");
+//        Property grhasCurrencyValue = ResourceFactory.createProperty(grNS + "hasCurrencyValue");
     }
 
 
