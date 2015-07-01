@@ -16,116 +16,139 @@ import org.openrdf.rio.RDFWriter
 import org.openrdf.rio.Rio
 import org.springframework.web.method.annotation.ModelFactory
 
+
+import org.openrdf.model.Model;
+import org.openrdf.model.Resource;
+import org.openrdf.model.URI;
+import org.openrdf.model.ValueFactory;
+import org.openrdf.model.impl.LinkedHashModel;
+import org.openrdf.model.impl.ValueFactoryImpl;
+import org.openrdf.model.util.Literals;
+import org.openrdf.model.vocabulary.RDF;
+import org.openrdf.model.vocabulary.RDFS;
+import org.openrdf.model.vocabulary.XMLSchema;
+import org.openrdf.model.vocabulary.FOAF
+import org.openrdf.rio.Rio;
+
+
 class RDFController {
 
-    private renderRDF(Model modelo) throws RDFHandlerException, IOException  {
+    final Map<String, String>  musicBrainzBase = [
+            URI: 'http://purl.org/ontology/mo/',
+            TRACK: 'Track'
+    ]
+
+    def afterInterceptor = {
+        renderRDF()
+    }
+
+    static final String musicBrainzBaseURI = 'http://purl.org/ontology/mo/'
+
+    private Model modelInstance
+
+    private void renderRDF(RDFFormat formato = RDFFormat.RDFXML) throws RDFHandlerException, IOException  {
         OutputStream out = response.outputStream
-        RDFWriter writer = Rio.createWriter(RDFFormat.RDFXML, out);
-        writer.startRDF();
-        for (Statement st: modelo) {
-            writer.handleStatement(st);
+        Rio.write(model, response.outputStream, formato);
+    }
+
+    private ValueFactory getFactory() {
+        ValueFactoryImpl.instance
+    }
+
+    private  Model getModel() {
+        if (!modelInstance)
+            modelInstance = new LinkedHashModel()
+
+        modelInstance
+    }
+
+    private void buildMusicRDF(Music music) {
+
+        model.setNamespace("rdf", RDF.NAMESPACE);
+        model.setNamespace("rdfs", RDFS.NAMESPACE);
+        model.setNamespace("xsd", XMLSchema.NAMESPACE);
+        model.setNamespace("mo", musicBrainzBaseURI);
+        model.setNamespace('foaf', FOAF.NAMESPACE)
+
+
+        URI moRecording = factory.createURI(musicBrainzBaseURI, 'Recording')
+        URI moRelease = factory.createURI(musicBrainzBaseURI, 'Release')
+
+
+        URI uriMusicResource =  factory.createURI(createLink(controller: 'music', action: 'show', id: music.id, absolute: true) as String)
+
+        //Literal, indicando qual o valor da propriedade recurso musica, no caso o nome dela
+        Literal musicLiteral = factory.createLiteral(music.name)
+
+        model.add(uriMusicResource, FOAF.NAME, musicLiteral)
+        model.add(uriMusicResource, RDF.TYPE, moRecording)
+
+        URI albumEntity = factory.createURI(createLink(controller: 'album', action: 'show', id: music.album.id, absolute: true) as String)
+
+        model.add(albumEntity, moRelease, uriMusicResource)
+    }
+
+
+    private void buildAuthorshipRDF(Authorship authorship) {
+        model.setNamespace("rdf", RDF.NAMESPACE);
+        model.setNamespace("rdfs", RDFS.NAMESPACE);
+        model.setNamespace("xsd", XMLSchema.NAMESPACE);
+        model.setNamespace("mo", musicBrainzBaseURI);
+        model.setNamespace('foaf', FOAF.NAMESPACE)
+
+
+        URI moTrack = factory.createURI(musicBrainzBaseURI, 'Track')
+        URI moAlbum = factory.createURI(musicBrainzBaseURI, 'album')
+
+
+        URI uriMusicResource =  factory.createURI(createLink(controller: 'music', action: 'show', id: music.id, absolute: true) as String)
+
+        //Literal, indicando qual o valor da propriedade recurso musica, no caso o nome dela
+        Literal musicLiteral = factory.createLiteral(music.name)
+
+        model.add(uriMusicResource, FOAF.NAME, musicLiteral)
+        model.add(uriMusicResource, RDF.TYPE, moTrack)
+
+        URI albumEntity = factory.createURI(createLink(controller: 'album', action: 'show', id: music.album.id, absolute: true) as String)
+
+        model.add(albumEntity, moAlbum, uriMusicResource)
+    }
+
+    private void buildAlbum(Album album) {
+
+    }
+
+
+
+    def authorships() {
+        Authorship.list().each {Authorship authorship ->
+            buildAuthorshipRDF(authorship)
         }
-        writer.endRDF();
     }
 
-    def index() { }
-    
-    def teste() {
-        Model model = ModelFactory.createDefaultModel();
-        String myNS = "http://localhost:8080/CDITravel/data/TourPackage/";
-        String foafNS = "http://xmlns.com/foaf/0.1/";
-        //model.setNsPrefix("gr", grNS);
-        model.setNamespace(new NamespaceImpl('foaf', foafNS))
-        ValueFactory factory = ValueFactoryImpl.instance
-        Resource foafName = factory.creteURI(foafNS + 'name')
-        Resource foafPerson = factory.creteURI(foafNS + 'Person')
-        
-        
-        
-        
-        
-//        Resource grOffering = ResourceFactory.createResource(grNS + "Offering");
-//        Resource grPriceSpecification = ResourceFactory.createResource(grNS + "PriceSpecification");
-//        Property gravailabilityStarts = ResourceFactory.createProperty(grNS + "availabilityStarts");
-//        Property gravailabilityEnds = ResourceFactory.createProperty(grNS + "availabilityEnds");
-//        Property grhasPriceSpecification = ResourceFactory.createProperty(grNS + "hasPriceSpecification");
-//        Property grhasCurrencyValue = ResourceFactory.createProperty(grNS + "hasCurrencyValue");
+    def authorship(Authorship authorshipInstance) {
+        buildAuthorshipRDF(authorshipInstance)
     }
-    
-    
-    def teste1() {
-        ValueFactory factory = ValueFactoryImpl.getInstance();
 
-        URI obama = factory.createURI("https://barackobama.com")
-        String foafNS = "http://xmlns.com/foaf/0.1/"
-        URI name = factory.createURI(foafNS + 'name')
-        Literal obamasName = factory.createLiteral("Obama")
-        Statement nameStatement = factory.createStatement(obama, name, obamasName)
-        
-        Model model = new LinkedHashModel()
-        model.add(nameStatement)
+    def albuns() {
+        Album.list().each { Album album ->
+            buildAlbum(album)
+        }
+    }
 
-
-        renderRDF(model)
+    def album(Album albumInstance) {
+        buildAlbum(albumInstance)
     }
 
 
     def musics() {
-        ValueFactory factory = ValueFactoryImpl.getInstance();
-
-        String musicBrainzBaseURI = 'http://purl.org/ontology/mo/'
-
-        // URI indicando artista
-
-        //BNode moNode = factory.createBNode('musicBrainzBaseURI')
-
-
-
-        Model model = new LinkedHashModel()
-
-        model.setNamespace('mo', musicBrainzBaseURI)
-        URI musicURI = factory.createURI(musicBrainzBaseURI, 'Track')
         Music.list().each { Music music ->
-            //URI indicando o recurso artista
-            //TODO verificar se esta correto ou se preciso encontrar o RDF do artista
-
-            URI uriMusicResource =  factory.createURI(music.url)
-
-            //Literal, indicando qual o valor da propriedade recurso musica, no caso o nome dela
-            Literal musicLiteral = factory.createLiteral(music.name)
-
-            Statement stmt = factory.createStatement(uriMusicResource, musicURI, musicLiteral)
-
-            model.add(stmt)
+            buildMusicRDF(music)
         }
-
-        renderRDF(model)
     }
 
-    def artists() {
 
-        ValueFactory factory = ValueFactoryImpl.getInstance();
-
-        String musicBrainzBaseURI = 'http://musicbrainz.org/mm/mm-2.1/'
-
-        // URI indicando artista
-        URI artistURI = factory.createURI(musicBrainzBaseURI, 'Artist')
-
-        Model model = new LinkedHashModel()
-
-        Authorship.list().each { Authorship authorship ->
-            //URI indicando o recurso artista
-            //TODO verificar se esta correto ou se preciso encontrar o RDF do artista
-            URI uriAuthorship =  factory.createURI(authorship.page)
-
-            //Literal, indicando qual o valor da propriedade recurso artista, no caso o nome dele
-            Literal authorshipLiteral = factory.createLiteral(authorship.name)
-
-            Statement stmt = factory.createStatement(uriAuthorship, artistURI, authorshipLiteral)
-
-            model.add(stmt)
-        }
-
-        renderRDF(model)
+    def music(Music musicInstance) {
+       buildMusicRDF(musicInstance)
     }
 }
