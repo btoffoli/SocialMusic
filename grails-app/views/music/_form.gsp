@@ -10,10 +10,10 @@
 
 <div class="fieldcontain ${hasErrors(bean: musicInstance, field: 'url', 'error')} ">
 	<label for="url">
-		<g:message code="music.url.label" default="URL" />
+		<g:message code="music.url.label"  />
 		
 	</label>
-	<g:textField name="url" value="${musicInstance?.url}"/>
+	<g:textField name="url" value="${musicInstance?.url}" pattern="https?://.+"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: musicInstance, field: 'album', 'error')} required">

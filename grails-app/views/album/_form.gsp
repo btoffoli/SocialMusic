@@ -22,17 +22,17 @@
 
 <div class="fieldcontain ${hasErrors(bean: albumInstance, field: 'name', 'error')} ">
 	<label for="name">
-		<g:message code="album.name.label" default="Nome" />
+		<g:message code="album.name.label" />
 		
 	</label>
 	<g:textField name="name" value="${albumInstance?.name}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: albumInstance, field: 'page', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: albumInstance, field: 'page', 'error')}  ">
 	<label for="page">
-		<g:message code="album.page.label" default="Pagina" />
+		<g:message code="album.page.label"  />
 		
 	</label>
-	<g:textField name="page" value="${albumInstance?.page}"/>
+	<g:textField name="page" value="${albumInstance?.page}" pattern="https?://.+"/>
 </div>
 
