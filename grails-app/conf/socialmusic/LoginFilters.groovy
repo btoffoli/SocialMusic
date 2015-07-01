@@ -11,7 +11,8 @@ class LoginFilters {
             [controller: 'account', action: 'home'],
             [controller: 'music', action: 'lastAdded'],
             [controller: 'album', action: 'lastAdded'],
-            [controller: 'authorship', action: 'lastAdded']
+            [controller: 'authorship', action: 'lastAdded'],
+            [controller: 'RDF', action: '*']
 
     ]
 
