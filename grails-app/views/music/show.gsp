@@ -59,7 +59,7 @@
 			</ol>
 			<g:form url="[resource:musicInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
-					<g:link class="edit" action="edit" resource="${musicInstance}"><g:message code="music.show.editbutton2"/>r</g:link>
+					<g:link class="edit" action="edit" resource="${musicInstance}"><g:message code="music.show.editbutton2"/></g:link>
 					<g:actionSubmit class="delete" action="delete" value="Deletar" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>

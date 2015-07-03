@@ -35,7 +35,7 @@
     <div class="sidebar_container">
         <div id="lastAddedAlbum" class="sidebar" style="display:none" >
             <div class="sidebar_item">
-                <h2><g:message code="default.button.home.lastAlbm"></g:message></h2>
+                <h2><g:message code="default.button.home.lastAlbum"></g:message></h2>
                 <a id="lastAddedAlbumPage" target="new"><h4 id="lastAddedAlbumName"></h4></a>
             </div><!--close sidebar_item-->
         </div><!--close sidebar-->
@@ -57,7 +57,7 @@
     <div id="content">
         <div class="content_item" style="text-align:center" >
             <div id="lastAddedMusic" style="display:none" >
-                <h1 style="background: -webkit-linear-gradient(#C56B85, #381029);border-radius: 0px 15px 0px 15px;padding: 20px;" >Última Música</h1>
+                <h1 style="background: -webkit-linear-gradient(#C56B85, #381029);border-radius: 0px 15px 0px 15px;padding: 20px;" ><g:message code="default.button.home.lastSong"></g:message></h1>
                 <div id="mainPlayer"></div>
             </div>
             <!--

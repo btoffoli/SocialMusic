@@ -14,7 +14,7 @@
 		<g:message code="authorship.page.label" />
 		
 	</label>
-	<g:textField name="page" value="${authorshipInstance?.page}"/>
+	<g:textField name="page" value="${authorshipInstance?.page}" pattern="https?://.+"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: authorshipInstance, field: 'albuns', 'error')} ">
