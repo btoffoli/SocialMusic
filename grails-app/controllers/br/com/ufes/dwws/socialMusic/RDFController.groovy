@@ -47,7 +47,6 @@ class RDFController {
     private Model modelInstance
 
     private void renderRDF(RDFFormat formato = RDFFormat.RDFXML) throws RDFHandlerException, IOException  {
-        OutputStream out = response.outputStream
         Rio.write(model, response.outputStream, formato);
     }
 
@@ -73,6 +72,8 @@ class RDFController {
 
         URI moRecording = factory.createURI(musicBrainzBaseURI, 'Recording')
         URI moRelease = factory.createURI(musicBrainzBaseURI, 'Release')
+        URI moMedium = factory.createURI(musicBrainzBaseURI, 'Medium')
+
 
 
         URI uriMusicResource =  factory.createURI(createLink(controller: 'music', action: 'show', id: music.id, absolute: true) as String)
@@ -82,6 +83,8 @@ class RDFController {
 
         model.add(uriMusicResource, FOAF.NAME, musicLiteral)
         model.add(uriMusicResource, RDF.TYPE, moRecording)
+        Literal linkYouTubeLiteral = factory.createLiteral(music.url)
+        model.add(uriMusicResource, moMedium,linkYouTubeLiteral)
 
         URI albumEntity = factory.createURI(createLink(controller: 'album', action: 'show', id: music.album.id, absolute: true) as String)
 
@@ -97,24 +100,36 @@ class RDFController {
         model.setNamespace('foaf', FOAF.NAMESPACE)
 
 
-        URI moTrack = factory.createURI(musicBrainzBaseURI, 'Track')
-        URI moAlbum = factory.createURI(musicBrainzBaseURI, 'album')
+    //TODO encontrar vocabulario para authorship
+        URI moauthorship = factory.createURI(musicBrainzBaseURI, 'authorship')
 
+        URI authorshipEntity = factory.createURI(createLink(controller: 'authorship', action: 'show', id: authorship.id, absolute: true) as String)
+        Literal authorshipNameLiteral = factory.createLiteral(authorship.name)
+        model.add(authorshipEntity, FOAF.NAME, authorshipNameLiteral)
+        model.add(authorshipEntity, RDF.TYPE, moauthorship)
 
-        URI uriMusicResource =  factory.createURI(createLink(controller: 'music', action: 'show', id: music.id, absolute: true) as String)
-
-        //Literal, indicando qual o valor da propriedade recurso musica, no caso o nome dela
-        Literal musicLiteral = factory.createLiteral(music.name)
-
-        model.add(uriMusicResource, FOAF.NAME, musicLiteral)
-        model.add(uriMusicResource, RDF.TYPE, moTrack)
-
-        URI albumEntity = factory.createURI(createLink(controller: 'album', action: 'show', id: music.album.id, absolute: true) as String)
-
-        model.add(albumEntity, moAlbum, uriMusicResource)
+        Literal linkLiteral = factory.createLiteral(authorship.page)
+        model.add(authorshipEntity, FOAF.PAGE, linkLiteral)
     }
 
     private void buildAlbum(Album album) {
+        model.setNamespace("rdf", RDF.NAMESPACE);
+        model.setNamespace("rdfs", RDFS.NAMESPACE);
+        model.setNamespace("xsd", XMLSchema.NAMESPACE);
+        model.setNamespace("mo", musicBrainzBaseURI);
+        model.setNamespace('foaf', FOAF.NAMESPACE)
+
+
+
+        URI moAlbum = factory.createURI(musicBrainzBaseURI, 'album')
+
+        URI albumEntity = factory.createURI(createLink(controller: 'album', action: 'show', id: album.id, absolute: true) as String)
+        Literal albumNameLiteral = factory.createLiteral(album.name)
+        model.add(albumEntity, FOAF.NAME, albumNameLiteral)
+        model.add(albumEntity, RDF.TYPE, moAlbum)
+
+        Literal linkLiteral = factory.createLiteral(album.page)
+        model.add(albumEntity, FOAF.PAGE, linkLiteral)
 
     }
 
