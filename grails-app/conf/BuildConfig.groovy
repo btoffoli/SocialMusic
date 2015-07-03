@@ -55,7 +55,8 @@ grails.project.dependency.resolution = {
 //        compile 'org.apache.jena:jena-arq:2.13.0'
 //        compile 'org.apache.jena:jena-runtime:2.12.0'
 //        compile group: 'org.apache.jena', name: 'jena', version: '2.13.0', packaging: 'pom'
-        compile 'org.openrdf.sesame:sesame-runtime:2.8.3'
+        //compile 'org.openrdf.sesame:sesame-runtime:2.8.3'
+        compile 'org.openrdf.sesame:sesame-runtime:2.7.16'
     }
 
     plugins {
