@@ -26,58 +26,63 @@ import org.springframework.web.method.annotation.ModelFactory
 @Transactional
 class RdfTestService {
 
-    static final String dbPedia = 'http://dbpedia.org/sparql'
+    static final String dbpedia = 'http://dbpedia.org/sparql'
+    static final String musicbrainz = 'http://linkedbrainz.org/sparql'
 
-    def test1() {
+    def executeQuery(endpoint, queryString, params) {
 
-        String queryStr = '''
-            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-
-            SELECT ?node, ?name, ?given
-            WHERE {
-            ?node foaf:name ?name .
-            OPTIONAL {
-             ?node foaf:givenName ?given .
-            }
-            } LIMIT 1000
-        '''
-
-        //Repository repo = new SPARQLRepository(dbPedia, '')
-        Repository repo = new HTTPRepository(dbPedia, '')
-        //Repository repo = new TupleRepo Repository(dbPedia, '')
-
+        Repository repo = new HTTPRepository(endpoint, '')
         repo.initialize()
+
         RepositoryConnection repoConnection = repo.connection
-
-//        SPARQLTupleQuery query = repoConnection.prepareQuery(QueryLanguage.SPARQL, queryStr)
-        TupleQuery query = repoConnection.prepareQuery(QueryLanguage.SPARQL, queryStr)
-
+    
+        TupleQuery query = repoConnection.prepareQuery(QueryLanguage.SPARQL, queryString)
         QueryResult result = query.evaluate()
 
-//        for(BindingSet bindSet : result) {
-//            String name = bindSet.getValue('name')
-//            println name
-//            for (String binding : bindSet.getBindingNames()) {
-//                println binding
-//            }
-//        }
         List<Map<String, Object>> resp = []
         while (result.hasNext()) {
             BindingSet bindSet = result.next();
-            String node = bindSet.getValue('node')
-            String name = bindSet.getValue('name')
-            String given = bindSet.getValue('give')
-            resp << [
-                    node: node,
-                    name: name,
-                    given: given
-            ]
+            
+            Map<String, Object> bindValues = [:]
+            params.each {
+                bindValues.put(it, bindSet.getValue(it))
+            }
+
+            resp << bindValues
         }
 
         return resp
-
     }
 
+    def getAuthorship(name) {
+
+        name = name.toLowerCase()
+
+        String queryStr = """
+            PREFIX mo: <http://purl.org/ontology/mo/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+
+            SELECT ?mbProducer ?dpProducer
+            WHERE {
+              ?mbProducer owl:sameAs ?dpProducer .
+
+              ?mbProducer rdf:type mo:MusicGroup .
+              ?mbProducer foaf:name ?name .
+
+                FILTER (regex(lcase(str(?name)), "${name}"))
+            }
+        """
+
+        def result = executeQuery(musicbrainz, queryStr, ['mbProducer', 'dpProducer'])
+        return result
+    }
+
+    def test() {
+
+        return getAuthorship('Red Hot Chili Peppers')
+
+    }
 
 }

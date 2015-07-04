@@ -18,3 +18,4 @@ web-app/WEB-INF/classes/*
 .settings/*
 classes
 *.project
+devDb.h2.db
