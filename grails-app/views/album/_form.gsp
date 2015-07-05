@@ -36,3 +36,11 @@
 	<g:textField name="page" value="${albumInstance?.page}" pattern="https?://.+"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: albumInstance, field: 'authorship', 'error')} required">
+	<label for="authorship">
+		<g:message code="default.button.myAuthorShip.label"/>
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="authorship" name="authorship.id" from="${br.com.ufes.dwws.socialMusic.Authorship.list()}" optionKey="id" required="" value="${musicInstance?.album?.id}" optionValue="name" class="many-to-one"/>
+</div>
+
