@@ -99,9 +99,7 @@ class RDFController {
         model.setNamespace("mo", musicBrainzBaseURI);
         model.setNamespace('foaf', FOAF.NAMESPACE)
 
-
-    //TODO encontrar vocabulario para authorship
-        URI moauthorship = factory.createURI(musicBrainzBaseURI, 'authorship')
+        URI moauthorship = factory.createURI(musicBrainzBaseURI, 'producer')
 
         URI authorshipEntity = factory.createURI(createLink(controller: 'authorship', action: 'show', id: authorship.id, absolute: true) as String)
         Literal authorshipNameLiteral = factory.createLiteral(authorship.name)
@@ -122,6 +120,7 @@ class RDFController {
 
 
         URI moAlbum = factory.createURI(musicBrainzBaseURI, 'album')
+        URI moProduced = factory.createURI(musicBrainzBaseURI, 'produced')
 
         URI albumEntity = factory.createURI(createLink(controller: 'album', action: 'show', id: album.id, absolute: true) as String)
         Literal albumNameLiteral = factory.createLiteral(album.name)
@@ -130,6 +129,10 @@ class RDFController {
 
         Literal linkLiteral = factory.createLiteral(album.page)
         model.add(albumEntity, FOAF.PAGE, linkLiteral)
+
+        URI authorshipEntity = factory.createURI(createLink(controller: 'authorship', action: 'show', id: album.authorship.id, absolute: true) as String)
+
+        model.add(authorshipEntity, moProduced, albumEntity)
 
     }
 
