@@ -80,6 +80,30 @@ class RdfTestService {
         return executeQuery(musicbrainz, queryStr, ['mbProducer', 'dpProducer'])
     }
 
+    def getAuthorshipAutocomplete(name) {
+
+        name = name.toLowerCase()
+
+        String queryStr = """
+            PREFIX mo: <http://purl.org/ontology/mo/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+
+            SELECT DISTINCT str(?name) AS ?name
+            WHERE {
+              ?mbProducer owl:sameAs ?dpProducer .
+
+              ?mbProducer rdf:type mo:MusicGroup .
+              ?mbProducer foaf:name ?name .
+
+                FILTER (regex(lcase(str(?name)), "${name}"))
+            }
+        """
+
+        return executeQuery(musicbrainz, queryStr, ['name'])
+    }
+
     def getAuthorshipData(name, language) {
 
         def authorship = getAuthorship(name)
@@ -193,6 +217,34 @@ class RdfTestService {
         return executeQuery(dbpedia, queryStr, ['album'])
     }
 
+    def getAlbumAutocomplete(name, authorshipName) {
+
+        name = name.toLowerCase()
+
+        def authorship = getAuthorship(authorshipName)
+        authorship = authorship[0].'dpProducer'
+
+        String queryStr = """
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX dbpprop: <http://dbpedia.org/property/>
+
+            PREFIX resource: <${authorship}>
+
+            SELECT DISTINCT str(?name) AS ?name
+            WHERE {
+                ?album foaf:name ?name .
+                ?album rdf:type dbpedia-owl:Album .
+                ?album dbpedia-owl:artist resource: .
+
+            FILTER (regex(lcase(str(?name)), "${name}"))
+            }
+        """
+
+        return executeQuery(dbpedia, queryStr, ['name'])
+    }
+
     def getAlbumData(name, authorshipName, language) {
 
         def album = getAlbum(name, authorshipName)
@@ -248,7 +300,31 @@ class RdfTestService {
         """
 
         return executeQuery(musicbrainz, queryStr, ['track'])
+    }
 
+    def getMusicAutocomplete(name, authorshipName) {
+
+        name = name.toLowerCase()
+        authorshipName = authorshipName.toLowerCase()
+
+        String queryStr = """
+            PREFIX mo: <http://purl.org/ontology/mo/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dc: <http://purl.org/dc/elements/1.1/>
+            PREFIX event: <http://purl.org/NET/c4dm/event.owl#>
+
+            SELECT DISTINCT str(?trackTitle) AS ?trackTitle
+            WHERE {
+                ?track dc:title ?trackTitle .
+                ?producer foaf:made ?track .
+                ?producer foaf:name ?producerName .
+
+            FILTER (regex(lcase(str(?producerName)), "${authorshipName}"))
+            FILTER (regex(lcase(str(?trackTitle)), "${name}"))
+            }
+        """
+
+        return executeQuery(musicbrainz, queryStr, ['trackTitle'])
     }
 
     def getMusicData(name, authorshipName) {
