@@ -165,7 +165,7 @@ class RdfTestService {
         return dpMembersData
     }
 
-    def getAlbum(name, authorshipName, language) {
+    def getAlbum(name, authorshipName) {
 
         name = name.toLowerCase()
 
@@ -180,22 +180,44 @@ class RdfTestService {
 
             PREFIX resource: <${authorship}>
 
+            SELECT ?album
+            WHERE {
+                ?album foaf:name ?name .
+                ?album rdf:type dbpedia-owl:Album .
+                ?album dbpedia-owl:artist resource: .
+
+            FILTER (regex(lcase(str(?name)), "${name}"))
+            }
+        """
+
+        return executeQuery(dbpedia, queryStr, ['album'])
+    }
+
+    def getAlbumData(name, authorshipName, language) {
+
+        def album = getAlbum(name, authorshipName)
+        album = album[0].'album'
+
+        String queryStr = """
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX dbpprop: <http://dbpedia.org/property/>
+
+            PREFIX resource: <${album}>
+
             SELECT str(?name) AS ?name
                    (CONCAT('https://en.wikipedia.org/wiki/File:', ?image) AS ?image)
                    ?release
                    (GROUP_CONCAT(?awards;separator=", ") as ?awards)
                    str(?abstract) AS ?abstract
             WHERE {
-              ?album foaf:name ?name .
-              ?album dbpprop:cover ?image .
-              ?album dbpprop:relyear ?release .
-              ?album dbpprop:award ?awards .
-              ?album dbpedia-owl:abstract ?abstract .
+              resource: foaf:name ?name .
+              resource: dbpprop:cover ?image .
+              resource: dbpprop:relyear ?release .
+              resource: dbpprop:award ?awards .
+              resource: dbpedia-owl:abstract ?abstract .
 
-              ?album rdf:type dbpedia-owl:Album .
-              ?album dbpedia-owl:artist resource: .
-
-            FILTER (regex(lcase(str(?name)), "${name}"))
             FILTER (langMatches(lang(?abstract), "${language}"))
             }
         """
@@ -204,6 +226,32 @@ class RdfTestService {
     }
 
     def getMusic(name, authorshipName) {
+
+        name = name.toLowerCase()
+        authorshipName = authorshipName.toLowerCase()
+
+        String queryStr = """
+            PREFIX mo: <http://purl.org/ontology/mo/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dc: <http://purl.org/dc/elements/1.1/>
+            PREFIX event: <http://purl.org/NET/c4dm/event.owl#>
+
+            SELECT ?track
+            WHERE {
+                ?track dc:title ?trackTitle .
+                ?producer foaf:made ?track .
+                ?producer foaf:name ?producerName .
+
+            FILTER (regex(lcase(str(?producerName)), "${authorshipName}"))
+            FILTER (regex(lcase(str(?trackTitle)), "${name}"))
+            }
+        """
+
+        return executeQuery(musicbrainz, queryStr, ['track'])
+
+    }
+
+    def getMusicData(name, authorshipName) {
 
         name = name.toLowerCase()
         authorshipName = authorshipName.toLowerCase()
