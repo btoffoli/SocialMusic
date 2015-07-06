@@ -1,5 +1,6 @@
 package br.com.ufes.dwws.socialMusic
 
+import grails.converters.JSON
 import org.openrdf.model.vocabulary.SESAME
 import org.springframework.context.i18n.LocaleContextHolder
 
@@ -112,6 +113,24 @@ class AlbumController {
         
         render "{\"id\":\"${album.id}\", \"name\":\"${album.name}\",\"page\":\"${album.page}\"}"
     }
+
+    def loadAlbumNames() {
+        String name = params.term
+        Long authorshipId = params.authorshipId as Long
+        Authorship authorship = Authorship.get(authorshipId)
+        List<Map<String, Object>> rdfNamesMusic = rdfService.getAlbumAutocomplete(name, authorship.name)
+        List<String> names
+        if (rdfNamesMusic) {
+            names = rdfNamesMusic.collect { (it.name as String).replace('\"', '') }
+        } else {
+            names = []
+        }
+
+        render names as JSON
+
+        return  names
+    }
+
 
    private Map<String, Object> buildAlbumData(Album albumInstance) {
        String lang = LocaleContextHolder.getLocale().language

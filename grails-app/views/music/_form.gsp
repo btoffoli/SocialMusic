@@ -5,7 +5,8 @@
 		<g:message code="music.name.label" default="Nome" />
 		
 	</label>
-	<g:textField name="name" value="${musicInstance?.name}"/>
+	<g:textField name="name" value="${musicInstance?.name}" class="ui-autocomplete-input" autocomplete="off"/>
+
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: musicInstance, field: 'url', 'error')} ">

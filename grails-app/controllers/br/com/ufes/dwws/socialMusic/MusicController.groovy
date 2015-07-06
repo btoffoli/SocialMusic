@@ -1,6 +1,6 @@
 package br.com.ufes.dwws.socialMusic
 
-
+import grails.converters.JSON
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -138,5 +138,22 @@ class MusicController {
         Music music = Music.last()
 
         render music.url
+    }
+
+    def loadMusicNames() {
+        String name = params.term
+        Long albumId = params.albumId as Long
+        Album album = Album.get(albumId)
+        List<Map<String, Object>> rdfNamesMusic = rdfService.getMusicAutocomplete(name, album.authorship.name)
+        List<String> names
+        if (rdfNamesMusic) {
+            names = rdfNamesMusic.collect { (it.trackTitle as String).replace('\"', '') }
+        } else {
+            names = []
+        }
+
+        render names as JSON
+
+        return  names
     }
 }

@@ -78,7 +78,7 @@ grails.project.dependency.resolution = {
         //runtime ":yui-minify-resources:0.1.5"
         compile ":console:1.5.4"
 
-        //compile ":ajaxdependancyselection:0.45-SNAPSHOT4"
+//        compile ":ajaxdependancyselection:0.45-SNAPSHOT4"
 
 
 //        compile ":rdfa:0.1.1"

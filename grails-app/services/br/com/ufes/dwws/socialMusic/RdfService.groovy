@@ -197,7 +197,10 @@ class RdfService {
             dpMembersData << dpMemberData
         }
 
-        return dpMembersData
+        if (dpMembersData && dpMembersData.first())
+            return dpMembersData
+        else
+            return []
     }
 
     def getAlbum(name, authorshipName) {

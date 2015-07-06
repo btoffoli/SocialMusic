@@ -116,6 +116,21 @@ class AuthorshipController {
         render "{\"id\":\"${authorship.id}\", \"name\":\"${authorship.name}\",\"page\":\"${authorship.page}\"}"
     }
 
+    def loadAuthorshipNames() {
+        String name = params.term
+        List<Map<String, Object>> rdfNamesMusic = rdfService.getAuthorshipAutocomplete(name)
+        List<String> names
+        if (rdfNamesMusic) {
+            names = rdfNamesMusic.collect { (it.name as String).replace('\"', '') }
+        } else {
+            names = []
+        }
+
+        render names as JSON
+
+        return  names
+    }
+
     private Map<String, Object> buildAuthorshipData(Authorship authorship) {
         Map<String, Object> resp = null
         String lang = LocaleContextHolder.getLocale().language
@@ -141,6 +156,8 @@ class AuthorshipController {
                     if (valor) {
                         //rdfMembers[idx][chave] =
                         map[chave] = valor.toString().replace('\"', '')
+                    } else {
+                        map[chave] = ''
                     }
                 }
             }
