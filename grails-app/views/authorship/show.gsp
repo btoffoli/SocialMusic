@@ -30,7 +30,7 @@
 
 				<g:if test="${authorshipInstance?.name}">
 				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="authorship.name.label"  /></span>
+					<span id="name-label" class="property-label"><g:message code="authorship.data.Name"  /></span>
 					
 						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${authorshipInstance}" field="name"/></span>
 					
@@ -39,7 +39,7 @@
 			
 				<g:if test="${authorshipInstance?.page}">
 				<li class="fieldcontain">
-					<span id="page-label" class="property-label"><g:message code="authorship.page.label" default="Pagina" /></span>
+					<span id="page-label" class="property-label"><g:message code="authorship.data.Page"  /></span>
 					
 						<span class="property-value" aria-labelledby="page-label"><g:link url="${authorshipInstance?.page}" target="_blank">Link</g:link></span>
 					
@@ -48,7 +48,7 @@
 
 				<g:if test="${authorshipInstance?.albuns}">
 				<li class="fieldcontain">
-					<span id="albuns-label" class="property-label"><g:message code="authorship.albuns.label" default="Albuns" /></span>
+					<span id="albuns-label" class="property-label"><g:message code="authorship.data.Albums"   /></span>
 					
 						<g:each in="${authorshipInstance.albuns}" var="a">
 						<span class="property-value" aria-labelledby="albuns-label"><g:link controller="album" action="show" id="${a.id}">${a?.name}</g:link></span>
@@ -59,7 +59,7 @@
 
 				<g:if test="${rdfAuthorshipData?.releaseYear}">
 					<li class="fieldcontain">
-						<span id="releaseYear-label" class="property-label"><g:message code="authorship.albuns.labelx" default="Release Year" /></span>
+						<span id="releaseYear-label" class="property-label"><g:message code="authorship.data.Formation"   /></span>
 
 						<span class="property-value" aria-labelledby="albuns-label">${rdfAuthorshipData.releaseYear}</span>
 

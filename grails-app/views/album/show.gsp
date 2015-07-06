@@ -31,14 +31,14 @@
 
 				<g:if test="${albumInstance?.name}">
 				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="album.name.label" default="Nome" /></span>
+					<span id="name-label" class="property-label"><g:message code="album.data.Name" /></span>
 						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${albumInstance}" field="name"/></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${albumInstance?.page}">
 				<li class="fieldcontain">
-					<span id="page-label" class="property-label"><g:message code="album.page.label" default="Pagina" /></span>
+					<span id="page-label" class="property-label"><g:message code="album.data.Page"  /></span>
 						<span class="property-value" aria-labelledby="page-label"><g:link url="${albumInstance?.page}" target="_blank">Link</g:link></span>
 					
 				</li>
@@ -57,14 +57,14 @@
 
 				<g:if test="${rdfAlbumData?.release}">
 					<li class="fieldcontain">
-						<span id="release-label" class="property-label"><g:message code="album.name.labelx" default="Release Year" /></span>
+						<span id="release-label" class="property-label"><g:message code="album.data.ReleaseYear"  /></span>
 						<span class="property-value" aria-labelledby="name-label">${rdfAlbumData.release}</span>
 					</li>
 				</g:if>
 
 				<g:if test="${rdfAlbumData?.awards}">
 					<li class="fieldcontain">
-						<span id="awards-label" class="property-label"><g:message code="album.name.labelx" default="Disc Awards" /></span>
+						<span id="awards-label" class="property-label"><g:message code="album.data.Awards"   /></span>
 						<span class="property-value" aria-labelledby="name-label">${rdfAlbumData.awards}</span>
 					</li>
 				</g:if>
