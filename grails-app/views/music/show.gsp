@@ -26,7 +26,7 @@
 
 				<g:if test="${musicInstance?.name}">
 				<li class="fieldcontain">
-					<span id="name-label" class="property-label" style="text-align: left; width: auto"><g:message code="music.name.label"  /></span>
+					<span id="name-label" class="property-label" style="text-align: left; width: auto"><g:message code="music.data.Name"  /></span>
 					
 						<span class="property-value" aria-labelledby="name-label" style="margin-left: 110px"><g:fieldValue bean="${musicInstance}" field="name"/></span>
 					
@@ -35,7 +35,7 @@
 
 				<g:if test="${musicInstance?.album}">
 				<li class="fieldcontain">
-					<span id="album-label" class="property-label" style="text-align: left; width: auto"><g:message code="music.album.label"  /></span>
+					<span id="album-label" class="property-label" style="text-align: left; width: auto"><g:message code="music.data.Album"  /></span>
 					<span class="property-value" aria-labelledby="album-label" style="margin-left: 110px">
 						<g:link controller="album" action="show" id="${musicInstance?.album?.id}">${musicInstance?.album?.name}</g:link>
 					</span>
@@ -44,7 +44,7 @@
 
 				<g:if test="${rdfMusicData?.maxTime}">
 					<li class="fieldcontain">
-						<span id="time-label" class="property-label" style="text-align: left; width: auto"><g:message code="music.name.labelx"  default="Time"/></span>
+						<span id="time-label" class="property-label" style="text-align: left; width: auto"><g:message code="music.data.Duration"  default="Time"/></span>
 
 						<span class="property-value" aria-labelledby="name-label" style="margin-left: 110px">${rdfMusicData.minTime} ~ ${rdfMusicData.maxTime}</span>
 
@@ -53,7 +53,7 @@
 
 				<g:if test="${musicInstance?.url}">
 					<li class="fieldcontain">
-						<span id="name-label" class="property-label" style="text-align: left; width: auto"><g:message code="music.url.label"  /></span>
+						<span id="name-label" class="property-label" style="text-align: left; width: auto"><g:message code="music.data.URL"  /></span>
 						
 							<span class="property-value" aria-labelledby="url-label" style="margin-left: 110px"><a href="${musicInstance?.url}" target="new"><g:fieldValue bean="${musicInstance}" field="url"/></a></span>
 						
