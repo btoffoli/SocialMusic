@@ -31,25 +31,25 @@
 
 				<g:if test="${albumInstance?.name}">
 				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="album.name.label" default="Nome" /></span>
-						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${albumInstance}" field="name"/></span>
+					<span id="name-label" class="property-label" style="text-align: left; width: auto"><g:message code="album.data.Name" /></span>
+						<span class="property-value" aria-labelledby="name-label" style="margin-left: 140px"><g:fieldValue bean="${albumInstance}" field="name"/></span>
 				</li>
 				</g:if>
 			
 				<g:if test="${albumInstance?.page}">
 				<li class="fieldcontain">
-					<span id="page-label" class="property-label"><g:message code="album.page.label" default="Pagina" /></span>
-						<span class="property-value" aria-labelledby="page-label"><g:link url="${albumInstance?.page}" target="_blank">Link</g:link></span>
+					<span id="page-label" class="property-label" style="text-align: left; width: auto"><g:message code="album.data.Page"  /></span>
+						<span class="property-value" aria-labelledby="page-label" style="margin-left: 140px"><g:link url="${albumInstance?.page}" target="_blank">Link</g:link></span>
 					
 				</li>
 				</g:if>
 
 				<g:if test="${albumInstance?.musics}">
 				<li class="fieldcontain">
-					<span id="musics-label" class="property-label"><g:message code="album.musics.label"  /></span>
+					<span id="musics-label" class="property-label" style="text-align: left; width: auto"><g:message code="album.musics.label"  /></span>
 					
 						<g:each in="${albumInstance.musics}" var="m">
-						<span class="property-value" aria-labelledby="musics-label"><g:link controller="music" action="show" id="${m.id}">${m?.name}</g:link></span>
+						<span class="property-value" aria-labelledby="musics-label" style="margin-left: 140px"><g:link controller="music" action="show" id="${m.id}">${m?.name}</g:link></span>
 						</g:each>
 					
 				</li>
@@ -57,15 +57,15 @@
 
 				<g:if test="${rdfAlbumData?.release}">
 					<li class="fieldcontain">
-						<span id="release-label" class="property-label"><g:message code="album.name.labelx" default="Release Year" /></span>
-						<span class="property-value" aria-labelledby="name-label">${rdfAlbumData.release}</span>
+						<span id="release-label" class="property-label" style="text-align: left; width: auto"><g:message code="album.data.ReleaseYear"  /></span>
+						<span class="property-value" aria-labelledby="name-label" style="margin-left: 140px">${rdfAlbumData.release}</span>
 					</li>
 				</g:if>
 
 				<g:if test="${rdfAlbumData?.awards}">
 					<li class="fieldcontain">
-						<span id="awards-label" class="property-label"><g:message code="album.name.labelx" default="Disc Awards" /></span>
-						<span class="property-value" aria-labelledby="name-label">${rdfAlbumData.awards}</span>
+						<span id="awards-label" class="property-label" style="text-align: left; width: auto"><g:message code="album.data.Awards"   /></span>
+						<span class="property-value" aria-labelledby="name-label" style="margin-left: 140px">${rdfAlbumData.awards}</span>
 					</li>
 				</g:if>
 
