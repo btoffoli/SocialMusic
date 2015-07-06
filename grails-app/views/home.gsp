@@ -49,7 +49,7 @@
         <div class="sidebar">
             <div class="sidebar_item">
                 <br><br><br><br>
-                <p>Projeto de site feito para a disciplina de DWWS do professor Vitor Souza. Autores: Bruno Toffoli, Victor Lemos e Fábio Oliveira</p>
+                <p><g:message code="home.ProjectDescription"/></p>
             </div><!--close sidebar_item-->
         </div><!--close sidebar-->
     </div><!--close sidebar_container-->
@@ -60,29 +60,11 @@
                 <h1 style="background: -webkit-linear-gradient(#C56B85, #381029);border-radius: 0px 15px 0px 15px;padding: 20px;" ><g:message code="default.button.home.lastSong"></g:message></h1>
                 <div id="mainPlayer"></div>
             </div>
-            <!--
-            <h1>Mais rock, ou mais pop ?</h1>
-            <div class="content_container">
-                <p>Você não precisa mais manter seu player aberto. Alias, em tempos de streaming, para que manter offline quando você pode ter seu acervo músical com você, aonde estiver ?</p>
-                <div class="button_small">
-                    <a href="http://codigofonte.uol.com.br/noticias/pesquisa-streaming-esta-acabando-com-pirataria-no-brasil" target="_blank">Saiba mais</a>
-                </div>
-            </div>
-            -->
+
         </div>
     </div>
 
-    <!--
-    <div id="content_blue">
-        <div class="content_blue_container_box">
-            <h4>SocialMusic no Facebook</h4>
-            <p> Veja o que estão falando sobre o nosso trabalho</p>
-            <div class="readmore">
-                <a href="#"><g:message code="default.button.home.VisitUs"></g:message></a>
-            </div>
-        </div>
-    </div>
-    -->
+
 </div><!--close site_content-->
 </body>
 </html>
