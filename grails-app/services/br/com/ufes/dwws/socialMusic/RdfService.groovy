@@ -24,36 +24,41 @@ import org.openrdf.repository.sparql.query.SPARQLTupleQuery
 import org.springframework.web.method.annotation.ModelFactory
 
 @Transactional
-class RdfTestService {
+class RdfService {
 
     static final String dbpedia = 'http://dbpedia.org/sparql'
     static final String musicbrainz = 'http://linkedbrainz.org/sparql'
 
     def executeQuery(endpoint, queryString, params) {
+        try {
+            Repository repo = new HTTPRepository(endpoint, '')
+            repo.initialize()
 
-        Repository repo = new HTTPRepository(endpoint, '')
-        repo.initialize()
+            RepositoryConnection repoConnection = repo.connection
 
-        RepositoryConnection repoConnection = repo.connection
-    
-        TupleQuery query = repoConnection.prepareQuery(QueryLanguage.SPARQL, queryString)
-        QueryResult result = query.evaluate()
+            TupleQuery query = repoConnection.prepareQuery(QueryLanguage.SPARQL, queryString)
+            QueryResult result = query.evaluate()
 
-        List<Map<String, Object>> resp = []
-        while (result.hasNext()) {
-            BindingSet bindSet = result.next();
-            
-            Map<String, Object> bindValues = [:]
-            params.each {
-                bindValues.put(it, bindSet.getValue(it))
+            List<Map<String, Object>> resp = []
+            while (result.hasNext()) {
+                BindingSet bindSet = result.next();
+
+                Map<String, Object> bindValues = [:]
+                params.each {
+                    bindValues.put(it, bindSet.getValue(it))
+                }
+
+                resp << bindValues
             }
 
-            resp << bindValues
+            repo.shutDown()
+
+            return resp
+        } catch (e) {
+            log.error("Erro ao consultar o endpoint - $endpoint", e)
         }
 
-        repo.shutDown()
-
-        return resp
+        return []
     }
 
     def getAuthorship(name) {
@@ -107,6 +112,9 @@ class RdfTestService {
     def getAuthorshipData(name, language) {
 
         def authorship = getAuthorship(name)
+        if (!authorship)
+            return []
+
         authorship = authorship[0].'dpProducer'
 
         String queryStr = """
@@ -138,6 +146,9 @@ class RdfTestService {
     def getAuthorshipMembers(name) {
 
         def authorship = getAuthorship(name)
+        if (!authorship)
+            return []
+
         def dpAuthorship = authorship[0].'dpProducer'
         def mbAuthorship = authorship[0].'mbProducer'
 
@@ -194,6 +205,9 @@ class RdfTestService {
         name = name.toLowerCase()
 
         def authorship = getAuthorship(authorshipName)
+        if (!authorship)
+            return []
+
         authorship = authorship[0].'dpProducer'
 
         String queryStr = """
@@ -222,6 +236,9 @@ class RdfTestService {
         name = name.toLowerCase()
 
         def authorship = getAuthorship(authorshipName)
+        if (!authorship)
+            return []
+
         authorship = authorship[0].'dpProducer'
 
         String queryStr = """
@@ -248,6 +265,9 @@ class RdfTestService {
     def getAlbumData(name, authorshipName, language) {
 
         def album = getAlbum(name, authorshipName)
+        if (!album)
+            return []
+
         album = album[0].'album'
 
         String queryStr = """
@@ -260,7 +280,7 @@ class RdfTestService {
 
             SELECT str(?name) AS ?name
                    (CONCAT('https://en.wikipedia.org/wiki/File:', ?image) AS ?image)
-                   ?release
+                   str(?release) AS ?release
                    (GROUP_CONCAT(?awards;separator=", ") as ?awards)
                    str(?abstract) AS ?abstract
             WHERE {

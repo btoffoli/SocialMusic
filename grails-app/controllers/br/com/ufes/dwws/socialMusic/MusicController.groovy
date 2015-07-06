@@ -8,6 +8,8 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class MusicController {
 
+    RdfService rdfService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -15,8 +17,36 @@ class MusicController {
         respond Music.list(params), model:[musicInstanceCount: Music.count()]
     }
 
+    private String formatTimeMillis(Integer milliSeconds) {
+        String result = "${(milliSeconds/60000) as Integer}:${((milliSeconds/1000 as Integer)%60)}"
+
+        return result
+    }
+
+
     def show(Music musicInstance) {
-        respond musicInstance
+        Map<String, Object> obj = null
+
+        List<Map<String, Object>> rdfMusicData = rdfService.getMusicData(musicInstance.name, musicInstance.album.authorship.name)
+        if (rdfMusicData) {
+            Integer maxTime = Integer.MIN_VALUE
+            Integer minTime = Integer.MAX_VALUE
+            rdfMusicData.each { Map<String, Object> map ->
+                Integer timeAux = (map.trackDuration as String).replace('\"', '') as Integer
+                if (timeAux < minTime)
+                    minTime = timeAux
+
+                if (timeAux > maxTime)
+                    maxTime = timeAux
+            }
+
+            obj = [
+                    maxTime: formatTimeMillis(maxTime),
+                    minTime: formatTimeMillis(minTime)
+            ]
+        }
+
+        respond musicInstance, model: [rdfMusicData: obj]
     }
 
     def create() {

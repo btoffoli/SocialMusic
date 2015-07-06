@@ -1,12 +1,15 @@
 package br.com.ufes.dwws.socialMusic
 
 import org.openrdf.model.vocabulary.SESAME
+import org.springframework.context.i18n.LocaleContextHolder
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class AlbumController {
+
+    RdfService rdfService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -16,7 +19,8 @@ class AlbumController {
     }
 
     def show(Album albumInstance) {
-        respond albumInstance
+        Map<String, Object> rdfAlbumDataFormatado = buildAlbumData(albumInstance)
+        respond albumInstance, model: [rdfAlbumData: rdfAlbumDataFormatado]
     }
 
     def create() {
@@ -109,29 +113,18 @@ class AlbumController {
         render "{\"id\":\"${album.id}\", \"name\":\"${album.name}\",\"page\":\"${album.page}\"}"
     }
 
-    def albumSparql() {
-        /*
+   private Map<String, Object> buildAlbumData(Album albumInstance) {
+       String lang = LocaleContextHolder.getLocale().language
+       List<Map<String, Object>> rdfAlbumData = rdfService.getAlbumData(albumInstance.name, albumInstance.authorship.name, lang)
+       Map<String, Object> rdfAlbumDataFormatado = null
+       if (rdfAlbumData) {
+           rdfAlbumDataFormatado = rdfAlbumData ? rdfAlbumData.first() : null
+           rdfAlbumDataFormatado.each { String chave, Object valor ->
+               if (valor)
+                rdfAlbumDataFormatado[chave] = valor.toString().replace('\"', '')
+           }
+       }
 
-SELECT ?name ?member ?nameBand
-WHERE {
- ?member foaf:name ?name .
- ?member mo:member_of ?band .
- ?band foaf:name ?nameBand FILTER(lcase(str(?nameBand))="metallica")
-}
-----------------------------------
-PREFIX mo: <http://purl.org/ontology/mo/>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-
-SELECT ?name ?member ?nameBand
-WHERE {
- ?member foaf:name ?name .
- ?member mo:member_of ?band .
- ?band foaf:name ?nameBand FILTER(lcase(str(?nameBand))="metallica")
-}
-         */
-
-
-
-
-    }
+       return rdfAlbumDataFormatado
+   }
 }

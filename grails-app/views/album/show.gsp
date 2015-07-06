@@ -22,6 +22,13 @@
 			</g:if>
 			<ol class="property-list album">
 
+
+				<g:if test="${rdfAlbumData?.image}">
+					<li class="fieldcontain">
+						<img src="${rdfAlbumData.image}" alt="${rdfAlbumData.image}" style="max-width: 400px; max-height: 400px"/>
+					</li>
+				</g:if>
+
 				<g:if test="${albumInstance?.name}">
 				<li class="fieldcontain">
 					<span id="name-label" class="property-label"><g:message code="album.name.label" default="Nome" /></span>
@@ -47,7 +54,28 @@
 					
 				</li>
 				</g:if>
-			
+
+				<g:if test="${rdfAlbumData?.release}">
+					<li class="fieldcontain">
+						<span id="release-label" class="property-label"><g:message code="album.name.labelx" default="Release Year" /></span>
+						<span class="property-value" aria-labelledby="name-label">${rdfAlbumData.release}</span>
+					</li>
+				</g:if>
+
+				<g:if test="${rdfAlbumData?.awards}">
+					<li class="fieldcontain">
+						<span id="awards-label" class="property-label"><g:message code="album.name.labelx" default="Disc Awards" /></span>
+						<span class="property-value" aria-labelledby="name-label">${rdfAlbumData.awards}</span>
+					</li>
+				</g:if>
+
+				<g:if test="${rdfAlbumData?.abstract}">
+					<li class="fieldcontain">
+						<span>${rdfAlbumData.abstract}</span>
+					</li>
+				</g:if>
+
+
 			</ol>
 			<g:form url="[resource:albumInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">

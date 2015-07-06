@@ -10,6 +10,7 @@ import org.openrdf.model.impl.NamespaceImpl
 import org.openrdf.model.impl.ValueFactoryImpl
 import org.openrdf.model.impl.LinkedHashModel
 import org.openrdf.model.URI
+import org.openrdf.model.vocabulary.OWL
 import org.openrdf.rio.RDFFormat
 import org.openrdf.rio.RDFHandlerException
 import org.openrdf.rio.RDFWriter
@@ -33,10 +34,18 @@ import org.openrdf.rio.Rio;
 
 class RDFController {
 
+    RdfService rdfService
+
     final Map<String, String>  musicBrainzBase = [
             URI: 'http://purl.org/ontology/mo/',
             TRACK: 'Track'
     ]
+
+    def beforeInterceptor = {
+        if (modelInstance) {
+            modelInstance.clear()
+        }
+    }
 
     def afterInterceptor = {
         renderRDF()
@@ -68,6 +77,7 @@ class RDFController {
         model.setNamespace("xsd", XMLSchema.NAMESPACE);
         model.setNamespace("mo", musicBrainzBaseURI);
         model.setNamespace('foaf', FOAF.NAMESPACE)
+        model.setNamespace('owl', OWL.NAMESPACE)
 
 
         URI moRecording = factory.createURI(musicBrainzBaseURI, 'Recording')
@@ -86,9 +96,16 @@ class RDFController {
         Literal linkYouTubeLiteral = factory.createLiteral(music.url)
         model.add(uriMusicResource, moMedium,linkYouTubeLiteral)
 
+        //Adiciona a referencia ao musicBrainz
+        List<Map<String, Object>> sameAsEntity = rdfService.getMusic(music.name, music.album.authorship.name)
+        URI mbReference = factory.createURI(sameAsEntity.first().track as String)
+        model.add(uriMusicResource, OWL.SAMEAS, mbReference)
+
+
         URI albumEntity = factory.createURI(createLink(controller: 'album', action: 'show', id: music.album.id, absolute: true) as String)
 
         model.add(albumEntity, moRelease, uriMusicResource)
+
     }
 
 
@@ -98,6 +115,7 @@ class RDFController {
         model.setNamespace("xsd", XMLSchema.NAMESPACE);
         model.setNamespace("mo", musicBrainzBaseURI);
         model.setNamespace('foaf', FOAF.NAMESPACE)
+        model.setNamespace('owl', OWL.NAMESPACE)
 
         URI moauthorship = factory.createURI(musicBrainzBaseURI, 'producer')
 
@@ -108,6 +126,15 @@ class RDFController {
 
         Literal linkLiteral = factory.createLiteral(authorship.page)
         model.add(authorshipEntity, FOAF.PAGE, linkLiteral)
+
+        //Adiciona a referencia ao musicBrainz e dbpedia
+        List<Map<String, Object>> sameAsEntity = rdfService.getAuthorship(authorship.name)
+        if (sameAsEntity) {
+            URI dpReference = factory.createURI(sameAsEntity.first().dpProducer as String)
+            URI mbReference = factory.createURI(sameAsEntity.first().mbProducer as String)
+            model.add(authorshipEntity, OWL.SAMEAS, mbReference)
+            model.add(authorshipEntity, OWL.SAMEAS, dpReference)
+        }
     }
 
     private void buildAlbum(Album album) {
@@ -116,6 +143,7 @@ class RDFController {
         model.setNamespace("xsd", XMLSchema.NAMESPACE);
         model.setNamespace("mo", musicBrainzBaseURI);
         model.setNamespace('foaf', FOAF.NAMESPACE)
+        model.setNamespace('owl', OWL.NAMESPACE)
 
 
 
@@ -130,10 +158,16 @@ class RDFController {
         Literal linkLiteral = factory.createLiteral(album.page)
         model.add(albumEntity, FOAF.PAGE, linkLiteral)
 
+        //Adiciona a referencia ao dbpedia
+        List<Map<String, Object>> sameAsEntity = rdfService.getAlbum(album.name, album.authorship.name)
+        if (sameAsEntity) {
+            URI dpReference = factory.createURI(sameAsEntity.first().album as String)
+            model.add(albumEntity, OWL.SAMEAS, dpReference)
+        }
+
         URI authorshipEntity = factory.createURI(createLink(controller: 'authorship', action: 'show', id: album.authorship.id, absolute: true) as String)
 
         model.add(authorshipEntity, moProduced, albumEntity)
-
     }
 
 

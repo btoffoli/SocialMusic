@@ -3,11 +3,15 @@ package br.com.ufes.dwws.socialMusic
 
 import grails.converters.JSON
 import groovy.json.*
+import org.springframework.context.i18n.LocaleContextHolder
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class AuthorshipController {
+
+    RdfService rdfService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -17,7 +21,9 @@ class AuthorshipController {
     }
 
     def show(Authorship authorshipInstance) {
-        respond authorshipInstance
+        Map<String, Object> rdfAuthorshipData = buildAuthorshipData(authorshipInstance)
+        List<Map> rdfMembers = buildMembersData(authorshipInstance)
+        respond authorshipInstance, model: [rdfAuthorshipData: rdfAuthorshipData, rdfMembers: rdfMembers]
     }
 
     def create() {
@@ -108,5 +114,38 @@ class AuthorshipController {
         Authorship authorship = Authorship.last()
         
         render "{\"id\":\"${authorship.id}\", \"name\":\"${authorship.name}\",\"page\":\"${authorship.page}\"}"
+    }
+
+    private Map<String, Object> buildAuthorshipData(Authorship authorship) {
+        Map<String, Object> resp = null
+        String lang = LocaleContextHolder.getLocale().language
+        List<Map<String, Object>> rdfAuthorShip = rdfService.getAuthorshipData(authorship.name, lang)
+
+        if (rdfAuthorShip) {
+            resp = rdfAuthorShip.first()
+            resp.each { String chave, Object valor ->
+                if (valor)
+                    resp[chave] = valor.toString().replace('\"', '')
+            }
+        }
+
+        return resp
+    }
+
+    private List<Map<String, Object>> buildMembersData(Authorship authorship) {
+        List<Map<String, Object>> rdfMembers = rdfService.getAuthorshipMembers(authorship.name)
+
+        if (rdfMembers) {
+            rdfMembers.eachWithIndex { Map map, int idx ->
+                map.each { String chave, Object valor ->
+                    if (valor) {
+                        //rdfMembers[idx][chave] =
+                        map[chave] = valor.toString().replace('\"', '')
+                    }
+                }
+            }
+        }
+
+        return rdfMembers
     }
 }

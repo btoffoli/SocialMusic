@@ -16,11 +16,3 @@
 	</label>
 	<g:textField name="page" value="${authorshipInstance?.page}" pattern="https?://.+"/>
 </div>
-
-<div class="fieldcontain ${hasErrors(bean: authorshipInstance, field: 'albuns', 'error')} ">
-	<label for="albuns">
-		<g:message code="authorship.albuns.label"  />
-		
-	</label>
-	<g:select name="albuns" from="${br.com.ufes.dwws.socialMusic.Album.list()}" multiple="multiple" optionKey="id" size="5" value="${authorshipInstance?.albuns*.id}" optionValue="name" class="many-to-many"/>
-</div>

@@ -21,7 +21,13 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list authorship">
-			
+
+				<g:if test="${rdfAuthorshipData?.image}">
+					<li class="fieldcontain">
+						<img src="${rdfAuthorshipData.image}" alt="${rdfAuthorshipData.image}" style="max-width: 400px; max-height: 400px"/>
+					</li>
+				</g:if>
+
 				<g:if test="${authorshipInstance?.name}">
 				<li class="fieldcontain">
 					<span id="name-label" class="property-label"><g:message code="authorship.name.label"  /></span>
@@ -50,11 +56,40 @@
 					
 				</li>
 				</g:if>
+
+				<g:if test="${rdfAuthorshipData?.releaseYear}">
+					<li class="fieldcontain">
+						<span id="releaseYear-label" class="property-label"><g:message code="authorship.albuns.labelx" default="Release Year" /></span>
+
+						<span class="property-value" aria-labelledby="albuns-label">${rdfAuthorshipData.releaseYear}</span>
+
+
+					</li>
+				</g:if>
+
+				<g:if test="${rdfAuthorshipData?.abstract}">
+					<li class="fieldcontain">
+						<span aria-labelledby="albuns-label">${rdfAuthorshipData.abstract}</span>
+					</li>
+				</g:if>
+
+				<hr />
+
+				<g:if test="${rdfMembers}">
+					<g:each in="${rdfMembers}">
+						<li class="fieldcontain">
+							<span>${it.name}</span>
+						</li>
+						<li class="fieldcontain">
+							<img src="${it.image}" alt="${it.image}" style="max-width: 100px; max-height: 100px"/>
+						</li>
+					</g:each>
+				</g:if>
 			
 			</ol>
 			<g:form url="[resource:authorshipInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
-					<g:link class="edit" action="edit" resource="${albumInstance}"><g:message code="authorship.show.editbutton"/></g:link>
+					<g:link class="edit" action="edit" resource="${authorshipInstance}"><g:message code="authorship.show.editbutton"/></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code:'default.music.show.deletebutton')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>

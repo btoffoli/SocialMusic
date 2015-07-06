@@ -42,6 +42,15 @@
 				</li>
 				</g:if>
 
+				<g:if test="${rdfMusicData?.maxTime}">
+					<li class="fieldcontain">
+						<span id="time-label" class="property-label"><g:message code="music.name.labelx"  default="Time"/></span>
+
+						<span class="property-value" aria-labelledby="name-label">${rdfMusicData.minTime} ~ ${rdfMusicData.maxTime}</span>
+
+					</li>
+				</g:if>
+
 				<g:if test="${musicInstance?.url}">
 					<li class="fieldcontain">
 						<span id="name-label" class="property-label"><g:message code="music.url.label"  /></span>
@@ -55,6 +64,8 @@
 						<div id="mainPlayer"></div>
 					</li>
 				</g:if>
+
+
 			
 			</ol>
 			<g:form url="[resource:musicInstance, action:'delete']" method="DELETE">
