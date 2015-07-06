@@ -67,18 +67,17 @@ class RDFController {
         if (!modelInstance)
             modelInstance = new LinkedHashModel()
 
+        modelInstance.setNamespace("rdf", RDF.NAMESPACE);
+        modelInstance.setNamespace("rdfs", RDFS.NAMESPACE);
+        modelInstance.setNamespace("xsd", XMLSchema.NAMESPACE);
+        modelInstance.setNamespace("mo", musicBrainzBaseURI);
+        modelInstance.setNamespace('foaf', FOAF.NAMESPACE)
+        modelInstance.setNamespace('owl', OWL.NAMESPACE)
+
         modelInstance
     }
 
     private void buildMusicRDF(Music music) {
-
-        model.setNamespace("rdf", RDF.NAMESPACE);
-        model.setNamespace("rdfs", RDFS.NAMESPACE);
-        model.setNamespace("xsd", XMLSchema.NAMESPACE);
-        model.setNamespace("mo", musicBrainzBaseURI);
-        model.setNamespace('foaf', FOAF.NAMESPACE)
-        model.setNamespace('owl', OWL.NAMESPACE)
-
 
         URI moRecording = factory.createURI(musicBrainzBaseURI, 'Recording')
         URI moRelease = factory.createURI(musicBrainzBaseURI, 'Release')
@@ -98,8 +97,10 @@ class RDFController {
 
         //Adiciona a referencia ao musicBrainz
         List<Map<String, Object>> sameAsEntity = rdfService.getMusic(music.name, music.album.authorship.name)
-        URI mbReference = factory.createURI(sameAsEntity.first().track as String)
-        model.add(uriMusicResource, OWL.SAMEAS, mbReference)
+        if (sameAsEntity) {
+            URI mbReference = factory.createURI(sameAsEntity.first().track as String)
+            model.add(uriMusicResource, OWL.SAMEAS, mbReference)
+        }
 
 
         URI albumEntity = factory.createURI(createLink(controller: 'album', action: 'show', id: music.album.id, absolute: true) as String)
@@ -138,14 +139,6 @@ class RDFController {
     }
 
     private void buildAlbum(Album album) {
-        model.setNamespace("rdf", RDF.NAMESPACE);
-        model.setNamespace("rdfs", RDFS.NAMESPACE);
-        model.setNamespace("xsd", XMLSchema.NAMESPACE);
-        model.setNamespace("mo", musicBrainzBaseURI);
-        model.setNamespace('foaf', FOAF.NAMESPACE)
-        model.setNamespace('owl', OWL.NAMESPACE)
-
-
 
         URI moAlbum = factory.createURI(musicBrainzBaseURI, 'album')
         URI moProduced = factory.createURI(musicBrainzBaseURI, 'produced')
