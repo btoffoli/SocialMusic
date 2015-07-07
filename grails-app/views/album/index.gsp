@@ -12,7 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><g:link class="create" action="create"><g:message code="album.index.newbutton"/></g:link></li>
-				<li><g:link class="rdf" controller="RDF" action="albuns"><g:message code="authorship.index.newbuttonx" default="RDF"/></g:link></li>
+				<li><g:link class="rdf" controller="RDF" action="albuns" target="_blank"><g:message code="rdf.button.label" default="RDF"/></g:link></li>
 			</ul>
 		</div>
 		<div id="list-album" class="content scaffold-list" role="main">

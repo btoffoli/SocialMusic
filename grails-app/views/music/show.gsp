@@ -15,12 +15,13 @@
 			<ul>
 				<li><g:link class="list" action="index"><g:message code="music.show.listbutton"/></g:link></li>
 				<li><g:link class="create" action="create"><g:message code="music.show.newbutton"/></g:link></li>
-				<li><g:link class="rdf" controller="RDF" action="music" id="${musicInstance.id}"><g:message code="authorship.index.newbuttonx" default="RDF"/></g:link></li>
+				<li><g:link class="rdf" controller="RDF" action="music" id="${musicInstance.id}" target="_blank"><g:message code="rdf.button.label" default="RDF"/></g:link></li>
 			</ul>
 		</div>
 		<div id="show-music" class="content scaffold-show" role="main">
 			<h1><g:message code="music.show.datalabel"/> </h1>
 			<g:if test="${flash.message}">
+			<div class="message" role="status">${flash.message}</div>
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list music">

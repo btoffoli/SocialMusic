@@ -12,7 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><g:link class="create" action="create"><g:message code="authorship.index.newbutton"/></g:link></li>
-				<li><g:link class="rdf" controller="RDF" action="authorships"><g:message code="authorship.index.newbuttonx" default="RDF"/></g:link></li>
+				<li><g:link class="rdf" controller="RDF" action="authorships" target="_blank"><g:message code="rdf.button.label" default="RDF"/></g:link></li>
 			</ul>
 		</div>
 		<div id="list-authorship" class="content scaffold-list" role="main">

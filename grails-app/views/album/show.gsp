@@ -13,7 +13,7 @@
 			<ul>
 				<li><g:link class="list" action="index"><g:message code="album.show.listbutton"/></g:link></li>
 				<li><g:link class="create" action="create"><g:message code="album.show.newbutton"/></g:link></li>
-				<li><g:link class="rdf" controller="RDF" action="album" id="${albumInstance.id}"><g:message code="authorship.index.newbuttonx" default="RDF"/></g:link></li>
+				<li><g:link class="rdf" controller="RDF" action="album" id="${albumInstance.id}" target="_blank"><g:message code="rdf.button.label" default="RDF"/></g:link></li>
 			</ul>
 		</div>
 		<div id="show-album" class="content scaffold-show" role="main">
