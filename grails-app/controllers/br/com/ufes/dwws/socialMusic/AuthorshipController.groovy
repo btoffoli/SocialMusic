@@ -118,10 +118,10 @@ class AuthorshipController {
 
     def loadAuthorshipNames() {
         String name = params.term
-        List<Map<String, Object>> rdfNamesMusic = rdfService.getAuthorshipAutocomplete(name)
+        List<Map<String, Object>> rdfNamesAuthorship = rdfService.getAuthorshipAutocomplete(name)
         List<String> names
-        if (rdfNamesMusic) {
-            names = rdfNamesMusic.collect { (it.name as String).replace('\"', '') }
+        if (rdfNamesAuthorship) {
+            names = rdfNamesAuthorship.collect { (it.name as String).replace('\"', '') }
         } else {
             names = []
         }
