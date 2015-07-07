@@ -13,6 +13,7 @@
 			<ul>
 				<li><g:link class="list" action="index"><g:message code="authorship.show.listbutton"/></g:link></li>
 				<li><g:link class="create" action="create"><g:message code="authorship.show.newbutton"/></g:link></li>
+				<li><g:link class="rdf" controller="RDF" action="authorship" id="${authorshipInstance.id}"><g:message code="authorship.index.newbuttonx" default="RDF"/></g:link></li>
 			</ul>
 		</div>
 		<div id="show-authorship" class="content scaffold-show" role="main">
@@ -77,12 +78,14 @@
 				<hr />
 
 				<g:if test="${rdfMembers}">
-					<g:each in="${rdfMembers}">
-						<li class="fieldcontain" style="margin-left: 10px; float: left; width: 135px; text-align: left">
-							<span>${it.name}</span>
-						<br>
-							<img src="${it.image}" alt="${it.image}" style=" float: left; max-width: 120px; max-height: 150px"/>
-						</li>
+					<g:each in="${rdfMembers}"  var="me">
+						<g:if test="${me != null}">
+							<li class="fieldcontain" style="margin-left: 10px; float: left; width: 135px; text-align: left">
+								<span>${me.name}</span>
+							<br>
+								<img src="${me.image}" alt="${me.image}" style=" float: left; max-width: 120px; max-height: 150px"/>
+							</li>
+						</g:if>
 					</g:each>
 				</g:if>
 			

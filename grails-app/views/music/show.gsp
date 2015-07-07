@@ -15,6 +15,7 @@
 			<ul>
 				<li><g:link class="list" action="index"><g:message code="music.show.listbutton"/></g:link></li>
 				<li><g:link class="create" action="create"><g:message code="music.show.newbutton"/></g:link></li>
+				<li><g:link class="rdf" controller="RDF" action="music" id="${musicInstance.id}"><g:message code="authorship.index.newbuttonx" default="RDF"/></g:link></li>
 			</ul>
 		</div>
 		<div id="show-music" class="content scaffold-show" role="main">
