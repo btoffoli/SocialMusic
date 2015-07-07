@@ -118,10 +118,10 @@ class AlbumController {
         String name = params.term
         Long authorshipId = params.authorshipId as Long
         Authorship authorship = Authorship.get(authorshipId)
-        List<Map<String, Object>> rdfNamesMusic = rdfService.getAlbumAutocomplete(name, authorship.name)
+        List<Map<String, Object>> rdfNamesAlbum = rdfService.getAlbumAutocomplete(name, authorship.name)
         List<String> names
-        if (rdfNamesMusic) {
-            names = rdfNamesMusic.collect { (it.name as String).replace('\"', '') }
+        if (rdfNamesAlbum) {
+            names = rdfNamesAlbum.collect { (it.name as String).replace('\"', '') }
         } else {
             names = []
         }
