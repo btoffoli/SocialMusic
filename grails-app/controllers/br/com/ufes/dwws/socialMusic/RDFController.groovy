@@ -85,7 +85,7 @@ class RDFController {
 
 
 
-        URI uriMusicResource =  factory.createURI(createLink(controller: 'music', action: 'show', id: music.id, absolute: true) as String)
+        URI uriMusicResource =  factory.createURI(createLink(controller: 'RDF', action: 'music', id: music.id, absolute: true) as String)
 
         //Literal, indicando qual o valor da propriedade recurso musica, no caso o nome dela
         Literal musicLiteral = factory.createLiteral(music.name)
@@ -103,7 +103,7 @@ class RDFController {
         }
 
 
-        URI albumEntity = factory.createURI(createLink(controller: 'album', action: 'show', id: music.album.id, absolute: true) as String)
+        URI albumEntity = factory.createURI(createLink(controller: 'RDF', action: 'album', id: music.album.id, absolute: true) as String)
 
         model.add(albumEntity, moRelease, uriMusicResource)
 
@@ -120,7 +120,7 @@ class RDFController {
 
         URI moauthorship = factory.createURI(musicBrainzBaseURI, 'producer')
 
-        URI authorshipEntity = factory.createURI(createLink(controller: 'authorship', action: 'show', id: authorship.id, absolute: true) as String)
+        URI authorshipEntity = factory.createURI(createLink(controller: 'RDF', action: 'authorship', id: authorship.id, absolute: true) as String)
         Literal authorshipNameLiteral = factory.createLiteral(authorship.name)
         model.add(authorshipEntity, FOAF.NAME, authorshipNameLiteral)
         model.add(authorshipEntity, RDF.TYPE, moauthorship)
@@ -143,7 +143,7 @@ class RDFController {
         URI moAlbum = factory.createURI(musicBrainzBaseURI, 'album')
         URI moProduced = factory.createURI(musicBrainzBaseURI, 'produced')
 
-        URI albumEntity = factory.createURI(createLink(controller: 'album', action: 'show', id: album.id, absolute: true) as String)
+        URI albumEntity = factory.createURI(createLink(controller: 'RDF', action: 'album', id: album.id, absolute: true) as String)
         Literal albumNameLiteral = factory.createLiteral(album.name)
         model.add(albumEntity, FOAF.NAME, albumNameLiteral)
         model.add(albumEntity, RDF.TYPE, moAlbum)
@@ -158,7 +158,7 @@ class RDFController {
             model.add(albumEntity, OWL.SAMEAS, dpReference)
         }
 
-        URI authorshipEntity = factory.createURI(createLink(controller: 'authorship', action: 'show', id: album.authorship.id, absolute: true) as String)
+        URI authorshipEntity = factory.createURI(createLink(controller: 'RDF', action: 'authorship', id: album.authorship.id, absolute: true) as String)
 
         model.add(authorshipEntity, moProduced, albumEntity)
     }
