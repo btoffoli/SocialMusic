@@ -41,6 +41,6 @@
 		<g:message code="default.button.myAuthorShip.label"/>
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="authorship" name="authorship.id" from="${br.com.ufes.dwws.socialMusic.Authorship.list()}" optionKey="id" required="" value="${albumInstance?.authorship.id}" optionValue="name" class="many-to-one"/>
+	<g:select id="authorship" name="authorship.id" from="${br.com.ufes.dwws.socialMusic.Authorship.list()}" optionKey="id" required="" value="${albumInstance?.authorship?.id}" optionValue="name" class="many-to-one"/>
 </div>
 
